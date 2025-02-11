@@ -1,13 +1,6 @@
-
-
-
-// Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-
-
-// Firebase Config (Replace with actual config)
 const firebaseConfig = {
     apiKey: "AIzaSyAAUkNjkeVbxCKPi8ySPcKLe8csRejc2T4",
     authDomain: "digitalmitra-c053e.firebaseapp.com",
@@ -21,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-console.log("✅ Firebase App Name:", app.name);
-console.log("✅ Firestore Instance:", db);
+console.log("✅ Firebase Initialized:", app);
+console.log("✅ Firestore Connected:", db);
 
-export { db };
+export { db, collection, addDoc };
