@@ -1,13 +1,15 @@
-function login() {
-    window.location.href="login.html";
-}
+// Import Firebase config
+import { db } from "./firebaseconfig.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-function register() {
-    window.location.href="registration.html";
+// Navigation Functions
+window.login = function() {
+    window.location.href = "login.html";
+};
 
-}
-document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    alert("Thank you for contacting us! We'll get back to you soon.");
-    this.reset();
-});
+window.register = function() {
+    window.location.href = "registration.html";
+};
+
+// Remove the test function call
+// Test Firestore Write - this is not needed anymore
