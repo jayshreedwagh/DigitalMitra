@@ -276,21 +276,3 @@ button {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
-/*for the custom popup*/
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 300px;
-    margin: 20% auto;
-    text-align: center;
-}
-
-.modal-content button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 10px;
-}
