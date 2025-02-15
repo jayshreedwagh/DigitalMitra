@@ -8,7 +8,7 @@ window.login = function() {
 };
 
 window.register = function() {
-    window.location.href = "registration.html";
+    window.location.href = "register.html";
 };
 
 // Remove the test function call
