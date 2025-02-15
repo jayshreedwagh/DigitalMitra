@@ -1,29 +1,24 @@
 import { auth } from "./firebaseconfig.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { showPopup } from "./popup.js";  // ✅ Import popup
 
 async function loginUser(event) {
-    event.preventDefault(); // Prevent form submission
+    event.preventDefault();
 
-    // Get input values
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     try {
-        // Firebase Auth sign-in
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        alert("✅ Login Successful!");
+        showPopup("✅ Login Successful!", true, "index.html"); // ✅ Redirect only after clicking OK
         console.log("✅ User logged in:", user.email);
-
-        // Redirect to dashboard
-        window.location.href = "dashboard.html";  // Change to your actual page
 
     } catch (error) {
         console.error("❌ Error logging in:", error);
-        alert("❌ Login failed: " + error.message);
+        showPopup("❌ Login failed, Invalid Credentials", false);
     }
 }
 
-// Attach event listener to login form
 document.getElementById("login-form").addEventListener("submit", loginUser);

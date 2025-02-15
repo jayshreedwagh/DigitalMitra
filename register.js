@@ -1,6 +1,7 @@
 import { auth, db } from "./firebaseconfig.js";
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { collection, query, where, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { showPopup } from "./popup.js";  // ✅ Import popup
 
 async function registerUser(event) {
     event.preventDefault();
@@ -16,7 +17,7 @@ async function registerUser(event) {
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
-            alert("❌ Username already taken! Choose a different one.");
+            showPopup("❌ Username already taken! Choose a different one.", false);
             return;
         }
 
@@ -32,11 +33,11 @@ async function registerUser(event) {
             timestamp: new Date()
         });
 
-        alert("🎉 Registered Successfully!");
+        showPopup("✅ Registered Successfully!", true, "login.html"); // ✅ Redirect to login after clicking OK
         event.target.reset();
 
     } catch (error) {
-        alert("⚠️ Registration failed: " + error.message);
+        showPopup("⚠️ Registration failed: " + error.message, false);
     }
 }
 
