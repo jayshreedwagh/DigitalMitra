@@ -8,19 +8,42 @@ body {
 }
 
 /* Header & Navigation */
+
 header {
     background-color: #003366;
     color: white;
     padding: 15px 50px;
     display: flex;
     justify-content: space-between;
+    align-items:center;
+}
+
+.first{
+    height: 30px;
+    color: white;
+    font: size 20px; 
+    background-color: #003366;
     align-items: center;
 }
-
 .logo img {
-    height: 50px;
+    height: 100px;
+    box-shadow:#948080;
+    width: 150px;
 }
-
+.text{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font: 10px;
+    font-weight:bold;
+    font-style:inherit;
+    box-shadow: #948080;
+    text-align: center;
+    font-size: 2em;
+}
+.text2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif; 
+    font-weight: lighter;
+    font-size:medium;
+}
 nav ul {
     list-style: none;
     display: flex;
@@ -44,7 +67,7 @@ nav ul li a:hover {
 
 /* Hero Banner / Carousel */
 .banner {
-    background: linear-gradient(135deg, #ffcc00, #ff8800);
+    background: linear-gradient(135deg, #f0df92, #efa4a4);
     padding: 50px;
     text-align: center;
     color: white;
@@ -264,4 +287,95 @@ button {
     padding: 10px;
     border: none;
     cursor: pointer;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+  
+.horizontal-scroll-section {
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f6f5f9;
+}
+  
+.scroll-container {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+    will-change: transform;
+    width: max-content;
+}
+  
+.image-card {
+    flex: 0 0 auto;
+    width: 400px;
+    height: 250px;
+    overflow: hidden;
+    border: 5px solid #ccc;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+  
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+  
+.image-card:hover {
+    transform: scale(1.05);
+}
+  
+.image-card:hover img {
+    transform: scale(1.1);
+}
+  
+  /* Navigation Arrows */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+}
+  
+.left-arrow {
+    left: 10px;
+}
+  
+.right-arrow {
+    right: 10px;
+}
+  
+.nav-arrow:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+  
+  /* Responsive Adjustments */
+@media (max-width: 600px) {
+    .image-card {
+      width: 180px;
+      height: 250px;
+}
+  
+.nav-arrow {
+      font-size: 20px;
+      padding: 5px 10px;
+    }
 }
