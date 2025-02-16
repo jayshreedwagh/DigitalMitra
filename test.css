@@ -1,0 +1,24 @@
+.next-button {
+    background-color: #f8f9fa;
+    border: 1px solid #d1d5da;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2); /* Adds subtle bottom shadow */
+  }
+  
+  .next-button:hover {
+    background-color: #e9ecef;
+  }
+  
+  .arrow {
+    font-weight: bold;
+    color: #333;
+  }
+  
