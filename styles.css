@@ -288,6 +288,7 @@ button {
     border: none;
     cursor: pointer;
 }
+<<<<<<< HEAD
 
 body {
     overflow-x: hidden;
@@ -379,3 +380,16 @@ body {
       padding: 5px 10px;
     }
 }
+=======
+/* Custom Alert Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+>>>>>>> d255bea0c23c5e7319d4df22e0e621bafef9625f

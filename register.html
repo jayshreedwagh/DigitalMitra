@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - DigitalMitra</title>
+    <title>Register - DigitalMitra</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>DigitalMitra Login</h1>
+        <h1>DigitalMitra Registration</h1>
     </header>
 
     <section class="form-container">
-        <h2>Login</h2>
-        <form id="login-form">
+        <h2>Register</h2>
+        <form id="register-form">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter Your Name" required>
+
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your Email">
+            <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter the Password" required>
+            <input type="password" id="password" name="password" placeholder="Enter Password" required>
 
-            <button type="submit">Login</button>
+            <button type="submit">Register</button>
         </form>
-        <p>Don't have an account? <a href="register.html">Register here</a></p>
+        <p>Already have an account? <a href="login.html">Login here</a></p>
     </section>
-    <!-- Popup Container (Add this to register.html & login.html) -->
-    <!-- Popup Container (Now at the Top) -->
+ <!-- Popup Container (Now at the Top) -->
 <div id="popup" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
 background: white; padding: 15px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
 z-index: 1000; width: 80%; max-width: 400px; text-align: center;">
@@ -34,10 +36,10 @@ z-index: 1000; width: 80%; max-width: 400px; text-align: center;">
     background: #007BFF; color: white; border-radius: 5px; cursor: pointer;">OK</button>
 </div>
 
-    <script type="module" src="popup.js"></script>
+<script type="module" src="popup.js"></script>
 
-    <script src="login.js"></script>
-    <script type="module" src="login.js"></script>
+<script type="module" src="register.js"></script>
+<script type="module" src="firebaseconfig.js"></script> 
 
 </body>
 </html>

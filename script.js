@@ -8,10 +8,11 @@ window.login = function() {
 };
 
 window.register = function() {
-    window.location.href = "registration.html";
+    window.location.href = "register.html";
 };
 
 // Remove the test function call
+<<<<<<< HEAD
 // Test Firestore Write - this is not needed anymore
 const scrollContainer = document.getElementById('scrollContainer');
 const imageCards = document.querySelectorAll('.image-card');
@@ -74,3 +75,6 @@ leftArrow.addEventListener('click', () => {
 
 // Start auto-scrolling on page load
 startAutoScroll();
+=======
+// Test Firestore Write - this is not needed anymore
+>>>>>>> d255bea0c23c5e7319d4df22e0e621bafef9625f
