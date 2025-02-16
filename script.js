@@ -12,7 +12,6 @@ window.register = function() {
 };
 
 // Remove the test function call
-<<<<<<< HEAD
 // Test Firestore Write - this is not needed anymore
 const scrollContainer = document.getElementById('scrollContainer');
 const imageCards = document.querySelectorAll('.image-card');
@@ -36,7 +35,7 @@ function autoScroll() {
     }, 50);
   } else {
     const scrollAmount = currentIndex * (imageCards[0].clientWidth + 20);
-    scrollContainer.style.transform = `translateX(-${scrollAmount}px)`;
+    scrollContainer.style.transform = 'translateX(-${scrollAmount}px)';
   }
 }
 
@@ -47,34 +46,31 @@ function startAutoScroll() {
 
 // Function to stop auto-scrolling
 function stopAutoScroll() {
-  clearInterval(autoScrollInterval);
-}
-
-// Pause on hover
-scrollContainer.addEventListener('mouseover', stopAutoScroll);
-scrollContainer.addEventListener('mouseout', startAutoScroll);
-
-// Manual navigation
-rightArrow.addEventListener('click', () => {
-  stopAutoScroll();
-  currentIndex++;
-  if (currentIndex >= imageCards.length) currentIndex = 0;
-  const scrollAmount = currentIndex * (imageCards[0].clientWidth + 20);
-  scrollContainer.style.transform = `translateX(-${scrollAmount}px)`;
+    clearInterval(autoScrollInterval);
+  }
+  
+  // Pause on hover
+  scrollContainer.addEventListener('mouseover', stopAutoScroll);
+  scrollContainer.addEventListener('mouseout', startAutoScroll);
+  
+  // Manual navigation
+  rightArrow.addEventListener('click', () => {
+    stopAutoScroll();
+    currentIndex++;
+    if (currentIndex >= imageCards.length) currentIndex = 0;
+    const scrollAmount = currentIndex * (imageCards[0].clientWidth + 20);
+    scrollContainer.style.transform = 'translateX(-${scrollAmount}px)';
+    startAutoScroll();
+  });
+  
+  leftArrow.addEventListener('click', () => {
+    stopAutoScroll();
+    currentIndex--;
+    if (currentIndex < 0) currentIndex = imageCards.length - 1;
+    const scrollAmount = currentIndex * (imageCards[0].clientWidth + 20);
+    scrollContainer.style.transform = 'translateX(-${scrollAmount}px)';
+    startAutoScroll();
+  });
+  
+  // Start auto-scrolling on page load
   startAutoScroll();
-});
-
-leftArrow.addEventListener('click', () => {
-  stopAutoScroll();
-  currentIndex--;
-  if (currentIndex < 0) currentIndex = imageCards.length - 1;
-  const scrollAmount = currentIndex * (imageCards[0].clientWidth + 20);
-  scrollContainer.style.transform = `translateX(-${scrollAmount}px)`;
-  startAutoScroll();
-});
-
-// Start auto-scrolling on page load
-startAutoScroll();
-=======
-// Test Firestore Write - this is not needed anymore
->>>>>>> d255bea0c23c5e7319d4df22e0e621bafef9625f
