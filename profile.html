@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Profile - DigitalMitra</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">Citizen Profile - DigitalMitra</div>
+
+        <!-- Profile Picture Upload -->
+        <div class="profile-pic">
+            <img id="profile-img" src="default-avatar.png" alt="Profile Picture">
+            <input type="file" id="upload-img" accept="image/*">
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress">0% Completed</div>
+            </div>
+        </div>
+
+        <!-- Profile Information Form -->
+        <div class="info">
+            <label>Full Name: <input type="text" id="name"></label>
+            <label>Gender: <input type="text" id="gender"></label>
+            <label>Age: <input type="number" id="age"></label>
+            <label>Date of Birth: <input type="date" id="dob"></label>
+            <label>Aadhar Number: <input type="text" id="aadhar"></label>
+            <label>PAN Card Number: <input type="text" id="pan"></label>
+            <label>Email: <input type="email" id="email"></label>
+            <label>Phone Number: <input type="tel" id="phone"></label>
+            <label>Address: <input type="text" id="address"></label>
+            <label>City: <input type="text" id="city"></label>
+            <label>State: <input type="text" id="state"></label>
+            <label>Country: <input type="text" value="India" disabled></label>
+        </div>
+
+        <button class="save-btn" id="save-btn">Save Profile</button>
+    </div>
+
+    <script src="profile.js"></script>
+</body>
+</html>

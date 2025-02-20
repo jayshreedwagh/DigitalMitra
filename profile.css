@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef2f7;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    max-width: 900px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
+    margin: auto;
+}
+
+.header {
+    font-size: 26px;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+/* Profile Picture */
+.profile-pic {
+    margin-bottom: 15px;
+}
+
+.profile-pic img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #003366;
+}
+
+input[type="file"] {
+    margin-top: 10px;
+}
+
+/* Progress Bar */
+.progress-container {
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 25px;
+    background-color: #28a745;
+    text-align: center;
+    color: white;
+    line-height: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Profile Fields */
+.info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.info label {
+    display: block;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Save Button */
+.save-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.save-btn:hover {
+    background-color: #002244;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .info {
+        grid-template-columns: 1fr;
+    }
+}
