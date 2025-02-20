@@ -21,19 +21,41 @@
             </ul>
         </nav>
     </header>
+    <div class="container">
+        <h1>Government Schemes </h1>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search schemes by name, category or description...">
+        </div>
 
-    <section class="schemes-container">
+        <div class="categories">
+            <h2>Categories:</h2>
+            <div class="category-buttons">
+                <!-- Categories will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <div class="schemes-grid" style="margin-right:100px;" >
+            <!-- Scheme cards will be dynamically inserted here -->
+        </div>
+    </div>
+
+
+    <!-- <section class="schemes-container">
         <h2>Available Schemes</h2>
         <div id="schemes-list">Loading schemes...</div>
-    </section>
+    </section> -->
 
-    <div id="popup" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    <!-- <div id="popup" style="display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
         background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.3); z-index: 1000;">
         <p id="popup-message"></p>
         <button id="close-popup">OK</button>
-    </div>
-
+    </div> -->
+    
     <script type="module" src="popup.js"></script>
     <script type="module" src="schemes.js"></script>
+    
+
 </body>
 </html>
