@@ -393,3 +393,39 @@ h1{
     justify-content: center;
     margin: 0 10px;
 }
+/* Make nav full-width and flex */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    width: 100%; /* Just for checking layout */
+}
+
+/* Keep nav links on the left */
+.nav-links {
+    display: flex;
+}
+
+/* Style the list properly */
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 20px;
+}
+
+/* FORCE profile icon to the right */
+.profile-container {
+    margin-left: auto; /* Pushes it away from the nav links */
+    display: flex;
+    align-items: center;
+}
+
+.profile-container img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
