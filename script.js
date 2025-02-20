@@ -13,64 +13,83 @@ window.register = function() {
 
 // Remove the test function call
 // Test Firestore Write - this is not needed anymore
-const scrollContainer = document.getElementById('scrollContainer');
-const imageCards = document.querySelectorAll('.image-card');
-const leftArrow = document.getElementById('leftArrow');
-const rightArrow = document.getElementById('rightArrow');
-let currentIndex = 0;
-const intervalTime = 3000;  // 3 seconds
-let autoScrollInterval;
+// const scrollContainer = document.getElementById('scrollContainer');
+// const imageCards = document.querySelectorAll('.image-card');
+// const leftArrow = document.getElementById('leftArrow');
+// const rightArrow = document.getElementById('rightArrow');
+// let currentIndex = 0;
+// const intervalTime = 3000;  // 3 seconds
+// let autoScrollInterval;
 
-// Function to handle auto-scrolling
-function autoScroll() {
-  currentIndex++;
+const track = document.getElementById('carouselTrack');
+const slides = document.getElementsByClassName('carousel-slide');
+const nextButton = document.getElementById('nextButton');
+const prevButton = document.getElementById('prevButton');
+const autoScrollDelay = 3000; // 3 seconds
 
-  // Reset to first image after the last image
-  if (currentIndex >= imageCards.length) {
-    currentIndex = 0;
-    scrollContainer.style.transition = 'none';
-    scrollContainer.style.transform = 'translateX(0)';
-    setTimeout(() => {
-      scrollContainer.style.transition = 'transform 0.5s ease';
-    }, 50);
-  } else {
-    const scrollAmount = currentIndex * (imageCards[0].clientWidth + 20);
-    scrollContainer.style.transform = 'translateX(-${scrollAmount}px)';
-  }
+let currentIndex = 1; // Start at 1 because we have a clone at 0
+let isTransitioning = false;
+let autoScrollInterval = null;
+
+// Function to update slide position
+function updateSlidePosition(transition = true) {
+    track.style.transition = transition ? 'transform 0.5s ease-in-out' : 'none';
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+// Set initial position
+updateSlidePosition();
+
+// Function to move to next/previous slide
+function moveToSlide(direction) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    
+    track.style.transition = 'transform 0.5s ease-in-out';
+    currentIndex += direction;
+    updateSlidePosition();
+}
+
+// Function to handle transition end
+function handleTransitionEnd() {
+    isTransitioning = false;
+    
+    // If we're at the clone slide, jump to the real slide
+    if (currentIndex === 0) {
+        track.style.transition = 'none';
+        currentIndex = slides.length - 2;
+        updateSlidePosition(false);
+    } else if (currentIndex === slides.length - 1) {
+        track.style.transition = 'none';
+        currentIndex = 1;
+        updateSlidePosition(false);
+    }
 }
 
 // Function to start auto-scrolling
 function startAutoScroll() {
-  autoScrollInterval = setInterval(autoScroll, intervalTime);
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+    }
+    autoScrollInterval = setInterval(() => moveToSlide(1), autoScrollDelay);
 }
 
 // Function to stop auto-scrolling
 function stopAutoScroll() {
-    clearInterval(autoScrollInterval);
-  }
-  
-  // Pause on hover
-  scrollContainer.addEventListener('mouseover', stopAutoScroll);
-  scrollContainer.addEventListener('mouseout', startAutoScroll);
-  
-  // Manual navigation
-  rightArrow.addEventListener('click', () => {
-    stopAutoScroll();
-    currentIndex++;
-    if (currentIndex >= imageCards.length) currentIndex = 0;
-    const scrollAmount = currentIndex * (imageCards[0].clientWidth + 20);
-    scrollContainer.style.transform = 'translateX(-${scrollAmount}px)';
-    startAutoScroll();
-  });
-  
-  leftArrow.addEventListener('click', () => {
-    stopAutoScroll();
-    currentIndex--;
-    if (currentIndex < 0) currentIndex = imageCards.length - 1;
-    const scrollAmount = currentIndex * (imageCards[0].clientWidth + 20);
-    scrollContainer.style.transform = 'translateX(-${scrollAmount}px)';
-    startAutoScroll();
-  });
-  
-  // Start auto-scrolling on page load
-  startAutoScroll();
+    if (autoScrollInterval) {
+        clearInterval(autoScrollInterval);
+        autoScrollInterval = null;
+    }
+}
+
+// Event Listeners
+nextButton.addEventListener('click', () => moveToSlide(1));
+prevButton.addEventListener('click', () => moveToSlide(-1));
+track.addEventListener('transitionend', handleTransitionEnd);
+
+// Pause on hover
+track.addEventListener('mouseenter', stopAutoScroll);
+track.addEventListener('mouseleave', startAutoScroll);
+
+// Start auto-scroll
+startAutoScroll();
