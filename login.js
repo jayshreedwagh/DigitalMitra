@@ -12,7 +12,7 @@ async function loginUser(event) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        showPopup("✅ Login Successful!", true, "index.html"); // ✅ Redirect only after clicking OK
+        showPopup("✅ Login Successful!", true, `index.html?uid=${user.uid}`);
         console.log("✅ User logged in:", user.email);
 
     } catch (error) {

@@ -68,23 +68,29 @@ input[type="file"] {
 /* Profile Fields */
 .info {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    grid-template-columns: 1fr;
+    gap: 10px; /* Reduces gap between fields */
     margin-top: 10px;
 }
 
 .info label {
-    display: block;
+    display: flex;
+    align-items: center;
     font-weight: bold;
+    gap: 10px;
+    width: 100%; /* Ensures uniform alignment */
 }
 
-input {
-    width: 100%;
+.info input, .info select {
+    flex: 1;
     padding: 8px;
-    margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    width: 100%; /* Makes all inputs and the dropdown the same width */
+    max-width: 300px; /* Optional: Adjust as needed */
 }
+
+
 
 /* Save Button */
 .save-btn {
@@ -122,6 +128,7 @@ input {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+
     font-size: 16px;
     font-weight: bold;
 }

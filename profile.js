@@ -1,18 +1,38 @@
+import { db, collection, addDoc, auth } from "firebaseConfig.js";
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
 document.addEventListener("DOMContentLoaded", function () {
-    const fields = document.querySelectorAll("input[type='text'], input[type='email'], input[type='number'], input[type='tel'], input[type='date']");
+    const fields = document.querySelectorAll("input, select");
     const saveBtn = document.getElementById("save-btn");
     const progressBar = document.getElementById("progress");
-    const profileImg = document.getElementById("profile-img");
-    const uploadImg = document.getElementById("upload-img");
+    
+    // 🔥 Detect logged-in user
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const userId = user.uid;
+            console.log("✅ Logged in as:", user.email);
 
-    // Load saved data from localStorage
-    fields.forEach(field => {
-        field.value = localStorage.getItem(field.id) || "";
+            // Fetch user profile data
+            const docRef = doc(db, "users", userId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const userData = docSnap.data();
+                fields.forEach(field => {
+                    if (userData[field.id]) {
+                        field.value = userData[field.id];
+                        field.disabled = true; // Lock pre-filled fields
+                    }
+                });
+                updateProgress();
+            }
+        } else {
+            console.log("⚠️ No user logged in.");
+        }
     });
 
-    profileImg.src = localStorage.getItem("profileImg") || "default-avatar.png";
-
-    // Function to calculate profile completion percentage
+    // ✅ Function to calculate profile completion percentage
     function updateProgress() {
         let filledFields = 0;
         fields.forEach(field => {
@@ -24,33 +44,30 @@ document.addEventListener("DOMContentLoaded", function () {
         progressBar.textContent = `${completion}% Completed`;
     }
 
-    // Save data & update progress
-    saveBtn.addEventListener("click", function () {
+    // ✅ Save user data to Firestore
+    saveBtn.addEventListener("click", async function () {
+        const user = auth.currentUser;
+        if (!user) {
+            alert("You need to be logged in to save your profile.");
+            return;
+        }
+
+        const userId = user.uid;
+        let userData = {};
+
         fields.forEach(field => {
-            localStorage.setItem(field.id, field.value);
+            if (field.value.trim() !== "") {
+                userData[field.id] = field.value;
+                field.disabled = true; // Lock after saving
+            }
         });
-        updateProgress();
-        alert("Profile saved successfully!");
-    });
 
-    // Update progress on input change
-    fields.forEach(field => {
-        field.addEventListener("input", updateProgress);
-    });
-
-    // Handle Profile Picture Upload
-    uploadImg.addEventListener("change", function () {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                profileImg.src = e.target.result;
-                localStorage.setItem("profileImg", e.target.result);
-            };
-            reader.readAsDataURL(file);
+        try {
+            await setDoc(doc(db, "users", userId), userData);
+            alert("Profile saved successfully!");
+            updateProgress();
+        } catch (error) {
+            console.error("Error saving data: ", error);
         }
     });
-
-    // Initial progress calculation
-    updateProgress();
 });
