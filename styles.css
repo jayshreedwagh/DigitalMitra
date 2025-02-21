@@ -512,6 +512,7 @@ h1 {
     display: block;
     width: 100%;
     align-content: normal;
+    height: max-content;
 }
 
 .scheme-card {
@@ -522,6 +523,7 @@ h1 {
     margin: 10px auto;
     border-radius: 30px;
     transition: box-shadow 0.2s;
+    height: fit-content;
 }
 
 .scheme-card:hover {
@@ -544,7 +546,23 @@ h1 {
 .scheme-description {
     margin-bottom: 1rem;
 }
+.scheme-eigibility{
+    font-size: small;
+    margin-bottom: 1rem;
+}
+.scheme-benefits{
+    margin-bottom: 1rem;
 
+}
+.scheme-t1{
+    font-size: medium;
+    font-weight: bold;
+
+}
+.scheme-t2{
+    font-size: medium;
+    font-weight: bold;
+}
 .scheme-link {
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -563,4 +581,8 @@ h1 {
     .schemes-grid {
         grid-template-columns: 1fr;
     }
+}
+.category-btn.active {
+    background-color: #007bff;
+    color: white;
 }
