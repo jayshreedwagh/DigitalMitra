@@ -7,6 +7,7 @@ body {
 }
 
 .container {
+    position:relative;
     max-width: 900px;
     background: white;
     padding: 20px;
@@ -87,16 +88,16 @@ input {
 
 /* Save Button */
 .save-btn {
+    
     display: block;
-    width: 100%;
     text-align: center;
-    background-color: #003366;
+    background-color: #22cd3e;
     color: white;
     padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
+    margin:20px auto;
     font-size: 16px;
     font-weight: bold;
 }
@@ -110,4 +111,20 @@ input {
     .info {
         grid-template-columns: 1fr;
     }
+}
+.next-btn{
+    position: absolute;  /* Position inside the container */
+    bottom: 10px;  /* Distance from the bottom of the container */
+    right: 10px;  /* Distance from the right of the container */
+    background-color: #a7a6b1;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+.next-btn:hover{
+    background-color: black;
 }
