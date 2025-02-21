@@ -450,8 +450,8 @@ body {
 }
 
 h1 {
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 2.25rem;
+    font-weight:bolder;
     margin-bottom: 1.5rem;
 }
 
@@ -481,7 +481,7 @@ h1 {
 }
 
 .categories h2 {
-    font-size: 1.25rem;
+    font-size:medium;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -495,7 +495,7 @@ h1 {
 .category-btn {
     padding: 0.25rem 0.75rem;
     background-color: #e6f0ff;
-    color: #1a56db;
+    color: #0b2e7c;
     border: none;
     border-radius: 9999px;
     cursor: pointer;
@@ -504,6 +504,11 @@ h1 {
 
 .category-btn:hover {
     background-color: #cce0ff;
+}
+
+.category-btn.active {
+    background-color: #154e8a;
+    color: white;
 }
 
 .schemes-grid {
@@ -532,8 +537,14 @@ h1 {
 }
 
 .scheme-title {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.scheme-subtitle {
+    color: #666;
+    font-size: 1.25rem;
     margin-bottom: 0.5rem;
 }
 
@@ -546,23 +557,32 @@ h1 {
 .scheme-description {
     margin-bottom: 1rem;
 }
-.scheme-eigibility{
+
+.scheme-eligibility,
+.scheme-benefits {
+    list-style-type: disc; /* Bullet points */
+    margin-left: 0; /* Remove extra margin */
+    padding-left: 20px; /* Ensure proper left spacing */
+    text-align: left; /* Align text to the left */
+}
+
+.scheme-eligibility li,
+.scheme-benefits li {
+    margin-bottom: 0.5rem;
     font-size: small;
-    margin-bottom: 1rem;
 }
-.scheme-benefits{
-    margin-bottom: 1rem;
+
+.scheme-t1,
+.scheme-t2 {
+    font-size:larger;
+    font-weight: bold;
+    margin: 1rem 0 0.5rem 0;
+    margin-left: 0; /* Remove extra margin */
+    padding-left: 20px; /* Ensure proper left spacing */
+    text-align: left;
 
 }
-.scheme-t1{
-    font-size: medium;
-    font-weight: bold;
 
-}
-.scheme-t2{
-    font-size: medium;
-    font-weight: bold;
-}
 .scheme-link {
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -581,8 +601,8 @@ h1 {
     .schemes-grid {
         grid-template-columns: 1fr;
     }
-}
-.category-btn.active {
-    background-color: #007bff;
-    color: white;
+    
+    .scheme-card {
+        margin: 10px 0;
+    }
 }

@@ -46,37 +46,9 @@ async function fetchSchemes() {
 fetchSchemes();
 
 const schemes = [
-  {
-    title: "Pradhan Mantri Shram Yogi Maan-Dhan Yojana (PM-SYM)",
-    subtitle: "(Old Age Protection)",
-    description: [
-      "Voluntary and contributory pension schemes",
-      "Monthly contribution ranges from Rs.55 to Rs.200 depending upon the entry age of the beneficiary.",
-      "Under this schemes, 50% monthly contribution is payable by the beneficiary and equal matching contribution is paid by the Central Government."
-    ],
-    category: "Financial",
-    t1:"Eligibility :",
-    eligibility: [
-      " 1)Should be an Indian Citizen",
-      " 2) Unorganised Workers (working as street vendors, agriculture related work, construction site workers, workers in industries of leather, handloom, mid-day meal, rickshaw or auto wheelers, rag picking, carpenters, fisherman's etc.",
-      "Age group of 18-40 years",
-      " 3)Monthly income is below Rs.15000 and not a member of EPFO/ESIC/NPS (Govt. funded)."
-    ],
-    t2:"Benefits :",
-    benefits: [
-      " 1)After attaining the age of 60 yrs, beneficiaries are entitled to receive monthly assured pension of Rs.3000/-      ",
-      " 2)On death of the beneficiary, spouse is eligible for 50% monthly pension.",
-      " 3)If husband and wife, both joins the scheme, they are eligible for Rs. 6000/- monthly pension jointly."
-    ],
-    link: "https://example.gov.in/pmsym"
-  },
+  
   {
       title: "PM Kisan Samman Nidhi",
-      description:[
-       " Direct income support of ₹6000 per year to farmer families",
-        "Amount is provided in three equal installments of ₹2000 each.",
-        "Funded by the Government of India."
-      ],
       t1:"Eligibility :",
       eligibility:[
 
@@ -97,9 +69,7 @@ const schemes = [
   },
   {
     title: "Ayushman Bharat",
-    description: ["Healthcare scheme providing coverage up to ₹5 lakhs per family per year.",
-                   "Covers hospitalization expenses for secondary and tertiary care.",
-                    "Aimed at economically weaker sections."],
+    
     category: "Healthcare",
     t1:"Eligibility :",
       eligibility:[
@@ -117,7 +87,7 @@ const schemes = [
 },
 {
     title: "PM Awas Yojana",
-    description: "Housing scheme for urban and rural areas to provide affordable housing.",
+    
     category: "Housing",
     t1:"Eligibility :",
     eligibility: [
@@ -135,7 +105,7 @@ const schemes = [
   },
   {
     title: "Sukanya Samriddhi Yojana",
-    description: "Savings scheme for girl child with high interest rate and tax benefits.",
+    
     category: "Financial",
     t1:"Eligibility :",
     eligibility: [
@@ -152,7 +122,7 @@ const schemes = [
   },
   {
     title: "PM Mudra Yojana",
-    description: "Loans up to ₹10 lakhs for small business ventures.",
+    
     category: "Business",
     t1:"Eligibility :",
     eligibility: [
@@ -169,7 +139,7 @@ const schemes = [
   },
   {
     title: "National Pension Scheme",
-    description: "Voluntary retirement savings scheme open to all citizens.",
+    
     category: "Financial",
     t1:"Eligibility :",
     eligibility: [
@@ -186,7 +156,7 @@ const schemes = [
   },
   {
     title: "PM Ujjwala Yojana",
-    description: "Free LPG connections to women from BPL households.",
+    
     category: "Welfare",
     t1:"Eligibility :",
     eligibility: [
@@ -203,7 +173,7 @@ const schemes = [
   },
   {
     title: "Atal Pension Yojana",
-    description: "Pension scheme for workers in the unorganized sector.",
+    
     category: "Financial",
     t1:"Eligibility :",
     eligibility: [
@@ -220,7 +190,7 @@ const schemes = [
   },
   {
     title: "PM Jan Dhan Yojana",
-    description: "Financial inclusion program providing bank accounts with benefits.",
+    
     category: "Financial",
     t1:"Eligibility :",
     eligibility: [
@@ -236,7 +206,7 @@ const schemes = [
   },
   {
     title: "Skill India Mission",
-    description: "Skill development and training program for youth.",
+    
     category: "Education",
     t1:"Eligibility :",
     eligibility: [
@@ -253,7 +223,7 @@ const schemes = [
   },
   {
     title: "Digital India",
-    description: "Initiative to transform India into a digitally empowered society.",
+   
     category: "Technology",
     t1:"Eligibility :",
     eligibility: [
@@ -270,7 +240,7 @@ const schemes = [
   },
   {
     title: "MGNREGA",
-    description: "Rural employment guarantee scheme providing 100 days of work.",
+    
     category: "Employment",
     t1:"Eligibility :",
     eligibility: [
@@ -287,7 +257,7 @@ const schemes = [
   },
   {
     title: "PM Garib Kalyan Anna Yojana",
-    description: "Free food grains distribution to poor families.",
+    
     category: "Welfare",
     t1:"Eligibility :",
     eligibility: [
@@ -304,7 +274,7 @@ const schemes = [
   },
   {
     title: "Beti Bachao Beti Padhao",
-    description: "Initiative to save and educate the girl child.",
+    
     category: "Education",
     t1:"Eligibility :",
     eligibility: [
@@ -321,7 +291,7 @@ const schemes = [
   },
   {
     title: "PM Fasal Bima Yojana",
-    description: "Crop insurance scheme for farmers.",
+    
     category: "Agriculture",
     t1:"Eligibility :",
     eligibility: [
@@ -338,7 +308,7 @@ const schemes = [
   },
   {
     title: "Startup India",
-    description: "Initiative to promote the startup ecosystem in India.",
+    
     category: "Business",
     t1:"Eligibility :",
     eligibility: [
@@ -356,7 +326,7 @@ const schemes = [
   },
   {
     title: "Swachh Bharat Mission",
-    description: "Clean India campaign for sanitation and waste management.",
+    
     category: "Environment",
     t1:"Eligibility :",
     eligibility: [
@@ -373,7 +343,6 @@ const schemes = [
   },
   {
     title: "National Rural Health Mission",
-    description: "Healthcare services improvement in rural areas.",
     category: "Healthcare",
     t1:"Eligibility :",
     eligibility: [
@@ -390,7 +359,6 @@ const schemes = [
   },
   {
     title: "PM Kaushal Vikas Yojana",
-    description: "Skill development program for Indian youth.",
     category: "Education",
     t1:"Eligibility :",
     eligibility: [
@@ -407,7 +375,6 @@ const schemes = [
   },
   {
     title: "Make in India",
-    description: "Initiative to encourage manufacturing in India.",
     category: "Business",
     t1:"Eligibility :",
     eligibility: [
@@ -421,10 +388,29 @@ const schemes = [
       "Job creation and industrial growth."
     ],
     link: "https://www.makeinindia.com/"
-  }
+  },
+  {
+    title: "Pradhan Mantri Shram Yogi Maan-Dhan Yojana (PM-SYM)",
+    subtitle: "(Old Age Protection)",
+   
+    category: "Financial",
+    t1:"Eligibility :",
+    eligibility: [
+      " 1)Should be an Indian Citizen.",
+      " 2) Unorganised Workers (working as street vendors, agriculture related work, construction site workers, workers in industries of leather, handloom, mid-day meal, rickshaw or auto wheelers, rag picking, carpenters, fisherman's etc.",
+      "Age group of 18-40 years.", 
+      " 3)Monthly income is below Rs.15000 and not a member of EPFO/ESIC/NPS (Govt. funded)."
+    ],
+    t2:"Benefits :",
+    benefits: [
+      " 1)After attaining the age of 60 yrs, beneficiaries are entitled to receive monthly assured pension of Rs.3000/-      ",
+      " 2)On death of the beneficiary, spouse is eligible for 50% monthly pension.",
+      " 3)If husband and wife, both joins the scheme, they are eligible for Rs. 6000/- monthly pension jointly."
+    ],
+    link: "https://example.gov.in/pmsym"
+  },
   // ... other schemes ...
 ];
-
 function renderSchemes(filteredSchemes) {
   const schemesGrid = document.querySelector('.schemes-grid');
   schemesGrid.innerHTML = '';
@@ -432,14 +418,33 @@ function renderSchemes(filteredSchemes) {
   filteredSchemes.forEach(scheme => {
       const schemeCard = document.createElement('div');
       schemeCard.className = 'scheme-card';
+
+      // Format description if it's an array
+     
+
+      // Create bullet points for eligibility and benefits
+      const createBulletList = (items) => {
+          if (Array.isArray(items)) {
+              return items.map(item => `<li>${item}</li>`).join('');
+          }
+          return `<li>${items}</li>`;
+      };
+
       schemeCard.innerHTML = `
           <h3 class="scheme-title">${scheme.title}</h3>
+          ${scheme.subtitle ? `<h4 class="scheme-subtitle">${scheme.subtitle}</h4>` : ''}
           <div class="scheme-category">${scheme.category}</div>
-          <p class="scheme-description">${scheme.description}</p>
-          <h4 class="scheme-t1">${scheme.t1}</h4>
-          <pclass="scheme-eiligiblity">${scheme.eligibility}</p>
-          <h5 class="scheme-t2">${scheme.t2}</h5>
-          <pclass="scheme-benefits">${scheme.benefits}</p>
+       
+          <div class="scheme-details">
+              <h4 class="scheme-t1">${scheme.t1}</h4>
+              <ul class="scheme-eligibility">
+                  ${createBulletList(scheme.eligibility)}
+              </ul>
+              <h4 class="scheme-t2">${scheme.t2}</h4>
+              <ul class="scheme-benefits">
+                  ${createBulletList(scheme.benefits)}
+              </ul>
+          </div>
           <a href="${scheme.link}" target="_blank" rel="noopener noreferrer" class="scheme-link">
               Visit Official Website
           </a>
@@ -448,24 +453,27 @@ function renderSchemes(filteredSchemes) {
   });
 }
 
+// Filter schemes based on search term or category
 function filterSchemes(searchTerm, isCategoryFilter = false) {
-  if (!searchTerm) return schemes; // Return all schemes if no search term
+  if (!searchTerm) return schemes;
 
-  return schemes.filter(scheme =>
-      isCategoryFilter
+  return schemes.filter(scheme => {
+      const searchFields = [
+          scheme.title,
+          scheme.category,
+          Array.isArray(scheme.eligibility) ? scheme.eligibility.join(' ') : scheme.eligibility,
+          Array.isArray(scheme.benefits) ? scheme.benefits.join(' ') : scheme.benefits
+      ];
+
+      const searchString = searchFields.join(' ').toLowerCase();
+      
+      return isCategoryFilter
           ? scheme.category.toLowerCase() === searchTerm.toLowerCase()
-          : (
-              scheme.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              scheme.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              scheme.description.toLowerCase().includes(searchTerm.toLowerCase())||
-              scheme.t1.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              scheme.eligibility.toLowerCase().includes(searchTerm.toLowerCase())||
-              scheme.t2.toLowerCase().includes(searchTerm.toLowerCase()) ||
-              scheme.benefits.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-  );
+          : searchString.includes(searchTerm.toLowerCase());
+  });
 }
 
+// Initialize category buttons
 function initializeCategories() {
   const categories = [...new Set(schemes.map(scheme => scheme.category))];
   const categoryButtons = document.querySelector('.category-buttons');
@@ -475,7 +483,6 @@ function initializeCategories() {
   allButton.className = 'category-btn active';
   allButton.textContent = 'All';
   allButton.addEventListener('click', () => {
-      // Remove active class from all buttons
       document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
       allButton.classList.add('active');
       renderSchemes(schemes);
@@ -489,7 +496,6 @@ function initializeCategories() {
       button.textContent = category;
 
       button.addEventListener('click', () => {
-          // Remove active class from all buttons
           document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
           button.classList.add('active');
           renderSchemes(filterSchemes(category, true));
@@ -509,11 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Reset active state of category buttons when searching
       document.querySelectorAll('.category-btn').forEach(btn => {
-          if (btn.textContent === 'All') {
-              btn.classList.add('active');
-          } else {
-              btn.classList.remove('active');
-          }
+          btn.classList[btn.textContent === 'All' ? 'add' : 'remove']('active');
       });
   });
 
