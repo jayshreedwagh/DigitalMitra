@@ -307,7 +307,7 @@ button {
     cursor: pointer;
 }
 .carousel-wrapper {
-    width: 800px;
+    width: 90%;
     margin: 50px auto;
     position: relative;
 }
@@ -605,4 +605,25 @@ h1 {
     .scheme-card {
         margin: 10px 0;
     }
+}
+.features {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.feature-card img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
 }
