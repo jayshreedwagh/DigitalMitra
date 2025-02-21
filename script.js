@@ -93,3 +93,14 @@ track.addEventListener('mouseleave', startAutoScroll);
 
 // Start auto-scroll
 startAutoScroll();
+
+document.addEventListener("DOMContentLoaded", function () {
+    let links = document.querySelectorAll(".nav-link");
+    let currentPage = window.location.pathname.split("/").pop(); // Get the current file name
+
+    links.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active"); // Add active class to the current page's button
+        }
+    });
+});
