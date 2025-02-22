@@ -16,7 +16,10 @@
             <img id="profile-img" src="default-avatar.png" alt="Profile Picture">
             <input type="file" id="upload-img" accept="image/*">
         </div>
-
+        <div class="user">
+            <label>Full Name: <input type="text" id="name" readonly></label>
+            <label>Email: <input type="email" id="email" readonly></label>
+        </div>
         <!-- Progress Bar -->
         <div class="progress-container">
             <div class="progress-bar">
@@ -26,7 +29,7 @@
 
         <!-- Profile Information Form -->
         <div class="info">
-            <label>Full Name: <input type="text" id="name"></label>
+            
             <label>Gender: 
                 <select id="gender">
                     <option value="">Select</option>
@@ -37,8 +40,6 @@
             </label>
             <label>Age: <input type="number" id="age"></label>
             <label>Date of Birth: <input type="date" id="dob"></label>
-            
-            <label>Email: <input type="email" id="email"></label>
             <label>Phone Number: <input type="tel" id="phone"></label>
           <!-- <label>Address: <input type="text" id="address"></label>
             <label>City: <input type="text" id="city"></label>
@@ -50,6 +51,6 @@
         <button class="next-btn" id="next-btn">Next⮕</button>
     </div>
 
-    <script src="profile.js"></script>
+    <script type="module" src="profile.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-import { auth } from "firebaseconfig.js";
+import { auth } from "./firebaseconfig.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { showPopup } from "./popup.js";  // ✅ Import popup
 

@@ -10,7 +10,7 @@ async function registerUser(event) {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    try {
+     try {
         // 🔍 Check if username already exists
         const usersRef = collection(db, "users");
         const q = query(usersRef, where("name", "==", name));

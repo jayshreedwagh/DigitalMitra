@@ -1,4 +1,5 @@
-import { db, doc, getDoc, setDoc, auth } from "firebaseconfig.js"; 
+import { db, auth } from "./firebaseconfig.js";  
+import { doc, getDoc, setDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -14,32 +15,34 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Check for logged-in user
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-            const userId = user.uid;
+            const userEmail = user.email;
             
-            // ✅ Store UID in Local Storage for persistent login
-            localStorage.setItem("userUID", userId);
-            localStorage.setItem("userEmail", user.email);
+            // ✅ Store Email in Local Storage
+            localStorage.setItem("userEmail", userEmail);
 
-            console.log("✅ Logged in as:", user.email);
+            console.log("✅ Logged in as:", userEmail);
 
-            // Fetch user profile data from Firestore
-            const docRef = doc(db, "users", userId);
-            const docSnap = await getDoc(docRef);
+            // ✅ Fetch user profile data from Firestore
+            const usersRef = collection(db, "users");
+            const q = query(usersRef, where("email", "==", userEmail));
+            const querySnapshot = await getDocs(q);
 
-            if (docSnap.exists()) {
+            if (!querySnapshot.empty) {
+                const docSnap = querySnapshot.docs[0]; // ✅ Get the first matching document
                 const userData = docSnap.data();
+                console.log("✅ User data found:", userData);
 
                 // ✅ Fill Name & Email Fields
-                nameField.value = userData.fullName || "N/A";
-                emailField.value = userData.email || user.email;
+                nameField.value = userData.name || "N/A";
+                emailField.value = userData.email || userEmail;
 
                 // ✅ Display beside profile picture
-                displayName.textContent = userData.fullName || "User";
-                displayEmail.textContent = userData.email || user.email;
+                displayName.textContent = userData.name || "User";
+                displayEmail.textContent = userData.email || userEmail;
 
                 // ✅ Lock name & email fields
-                nameField.setAttribute("readonly", true);
-                emailField.setAttribute("readonly", true);
+                nameField.setAttribute("disabled", true);
+                emailField.setAttribute("disabled", true);
 
                 // ✅ Fill other fields
                 fields.forEach(field => {
@@ -50,17 +53,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 updateProgress();
             } else {
-                console.log("⚠️ No profile data found. New user?");
+                console.log("⚠️ No profile data found for email:", userEmail);
             }
         } else {
             console.log("⚠️ No user logged in.");
-            localStorage.removeItem("userUID");  // ✅ Remove UID from Local Storage
+            localStorage.removeItem("userEmail");  
             window.location.href = "login.html"; // Redirect if not logged in
         }
     });
 
     // ✅ Function to calculate profile completion percentage
     function updateProgress() {
+        if (!progressBar) return;
+
         let filledFields = 0;
         fields.forEach(field => {
             if (field.value.trim() !== "") filledFields++;
@@ -71,29 +76,36 @@ document.addEventListener("DOMContentLoaded", function () {
         progressBar.textContent = `${completion}% Completed`;
     }
 
+    // ✅ Update progress when fields are edited
+    fields.forEach(field => {
+        field.addEventListener("input", updateProgress);
+    });
+
     // ✅ Save user data to Firestore
-    saveBtn.addEventListener("click", async function () {
-        const userId = localStorage.getItem("userUID");  // Retrieve UID from storage
+    if (saveBtn) {  
+        saveBtn.addEventListener("click", async function () {
+            const userEmail = localStorage.getItem("userEmail"); 
 
-        if (!userId) {
-            alert("⚠️ You need to be logged in to save your profile.");
-            return;
-        }
+            if (!userEmail) {
+                alert("⚠️ You need to be logged in to save your profile.");
+                return;
+            }
 
-        let userData = {};
+            let userData = {};
 
-        fields.forEach(field => {
-            if (field.value.trim() !== "" && field !== nameField && field !== emailField) {
-                userData[field.id] = field.value;
+            fields.forEach(field => {
+                if (field.value.trim() !== "" && field !== nameField && field !== emailField) {
+                    userData[field.id] = field.value;
+                }
+            });
+
+            try {
+                await setDoc(doc(db, "users", userEmail), userData, { merge: true }); // ✅ Save using email
+                alert("✅ Profile saved successfully!");
+                updateProgress();
+            } catch (error) {
+                console.error("❌ Error saving data:", error);
             }
         });
-
-        try {
-            await setDoc(doc(db, "users", userId), userData, { merge: true });
-            alert("✅ Profile saved successfully!");
-            updateProgress();
-        } catch (error) {
-            console.error("❌ Error saving data:", error);
-        }
-    });
+    }
 });

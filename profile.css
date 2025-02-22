@@ -27,6 +27,7 @@ body {
 /* Profile Picture */
 .profile-pic {
     margin-bottom: 15px;
+    text-align: left;
 }
 
 .profile-pic img {
@@ -43,6 +44,7 @@ input[type="file"] {
 
 /* Progress Bar */
 .progress-container {
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -135,3 +137,108 @@ input[type="file"] {
 .next-btn:hover{
     background-color: black;
 }
+.profile-container {
+    display: flex;
+    justify-content: space-between; /* Pushes profile pic to left, user info to right */
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.user-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px; /* Reduces gap between fields */
+    margin-top: 10px;
+}
+
+.user-info input {
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
+    width: 250px;
+}
+/* Profile Info Section */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the left */
+    width: 100%; /* Full width */
+    margin-bottom: 10px;
+}
+
+.profile-info .full-name {
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%; /* Full width */
+    padding: 5px 0;
+}
+
+.profile-info .email {
+    font-size: 16px;
+    color: #555;
+    padding: 3px 0;
+}
+.user-info label{
+    display: flex;
+    flex-direction: column;  /* Stack label and input */
+    font-weight: bold;
+    margin-bottom: 10px; /* Add spacing */
+}
+/* Align labels and inputs in a row */
+.info label {
+    display: flex;
+    align-items: center; /* Align text and input fields */
+    justify-content: space-between; /* Space between label and input */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Ensure inputs take proper width */
+.info input {
+    width: 70%;  /* Adjust width as needed */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+}
+
+/* Make the info section properly aligned */
+.info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px; /* Adjust as needed */
+}
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligns fields to the right */
+    text-align: right;
+    width: 100%;
+    margin-top: 10px; /* Increase this value to move it more downward */
+    
+}
+
+.user label {
+    display: flex;
+    justify-content: flex-end; /* Moves text and input to the right */
+    gap: 10px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.user input {
+    width: 400px; /* Adjust as needed */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f3f3f3;
+}
+#name, #email {
+    pointer-events: none;
+    background-color: #f0f0f0;
+}
+
+
