@@ -1,4 +1,4 @@
-import { auth } from "./firebaseconfig.js";
+import { auth } from "firebaseconfig.js";
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { showPopup } from "./popup.js";  // ✅ Import popup
 
@@ -11,6 +11,9 @@ async function loginUser(event) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+
+        localStorage.setItem("userUID", user.uid);
+        localStorage.setItem("userEmail", user.email);
 
         showPopup("✅ Login Successful!", true, `homepage.html?uid=${user.uid}`);
         console.log("✅ User logged in:", user.email);

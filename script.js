@@ -1,5 +1,5 @@
 // Import Firebase config
-import { db } from "./firebaseconfig.js";
+import { db } from "firebaseconfig.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // Navigation Functions
