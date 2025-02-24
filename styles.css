@@ -430,6 +430,18 @@ nav {
     border-radius: 50%;
     cursor: pointer;
 }
+.notification {
+    margin-left: auto; /* Pushes it away from the nav links */
+    display: flex;
+    align-items: center;
+}
+
+.notification img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
 
 /*schemes page */
 * {
@@ -606,7 +618,6 @@ h1 {
         margin: 10px 0;
     }
 }
-<<<<<<< HEAD
 .features {
     max-width: 1200px;
     margin: 4rem auto;
@@ -628,7 +639,6 @@ h1 {
     height: 80px;
     margin-bottom: 1rem;
 }
-=======
 
 
 .nav-link:hover {
@@ -656,4 +666,3 @@ h1 {
     height: 2px; /* Underline thickness */
     background-color: white; /* Underline color */
 }
->>>>>>> b924e5c (push)
