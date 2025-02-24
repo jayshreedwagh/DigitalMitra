@@ -12,49 +12,79 @@ document.addEventListener("DOMContentLoaded", function () {
     const displayName = document.getElementById("display-name");
     const displayEmail = document.getElementById("display-email");
 
+    function updateProgress() {
+        if (!progressBar) return;
+        let filledFields = 0;
+        let totalFields = 0;
+    
+        fields.forEach(field => {
+            if (field.id !== "name" && field.id !== "email") { 
+                totalFields++;
+                if (field.value.trim() !== "") filledFields++;
+            }
+        });
+    
+        const completion = totalFields > 0 ? Math.round((filledFields / totalFields) * 100) : 0;
+        progressBar.style.width = `${completion}%`;
+        progressBar.textContent = `${completion}% Completed`;
+    }
+    
+
+    // ✅ Fetch user data and lock already saved fields
+ // ✅ Fetch user data and lock already saved fields
+async function fetchUserData(userEmail) {
+    const userRef = doc(db, "users", userEmail);
+    const docSnap = await getDoc(userRef);
+
+    let userData = {};
+
+    if (docSnap.exists()) {
+        userData = docSnap.data();
+        console.log("✅ User data found (by ID):", userData);
+    } else {
+        console.log("⚠️ No user document found by ID, searching by email...");
+        
+        const usersRef = collection(db, "users");
+        const q = query(usersRef, where("email", "==", userEmail));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+            const docSnap = querySnapshot.docs[0]; 
+            userData = docSnap.data();
+            console.log("✅ User data found (by email query):", userData);
+        } else {
+            console.log("⚠️ No profile data found for email:", userEmail);
+            return;
+        }
+    }
+
+    // ✅ Fill in the fields with saved data
+    nameField.value = userData.name || "N/A";
+    emailField.value = userData.email || userEmail;
+    displayName.textContent = userData.name || "User";
+    displayEmail.textContent = userData.email || userEmail;
+
+    nameField.setAttribute("disabled", true);
+    emailField.setAttribute("disabled", true);
+
+    fields.forEach(field => {
+        if (userData[field.id]) {
+            field.value = userData[field.id];
+            field.setAttribute("disabled", true); // ✅ Lock fields that are already saved
+        }
+    });
+
+    updateProgress();
+}
+
+
     // ✅ Check for logged-in user
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             const userEmail = user.email;
-            
-            // ✅ Store Email in Local Storage
             localStorage.setItem("userEmail", userEmail);
-
             console.log("✅ Logged in as:", userEmail);
-
-            // ✅ Fetch user profile data from Firestore
-            const usersRef = collection(db, "users");
-            const q = query(usersRef, where("email", "==", userEmail));
-            const querySnapshot = await getDocs(q);
-
-            if (!querySnapshot.empty) {
-                const docSnap = querySnapshot.docs[0]; // ✅ Get the first matching document
-                const userData = docSnap.data();
-                console.log("✅ User data found:", userData);
-
-                // ✅ Fill Name & Email Fields
-                nameField.value = userData.name || "N/A";
-                emailField.value = userData.email || userEmail;
-
-                // ✅ Display beside profile picture
-                displayName.textContent = userData.name || "User";
-                displayEmail.textContent = userData.email || userEmail;
-
-                // ✅ Lock name & email fields
-                nameField.setAttribute("disabled", true);
-                emailField.setAttribute("disabled", true);
-
-                // ✅ Fill other fields
-                fields.forEach(field => {
-                    if (userData[field.id] && field !== nameField && field !== emailField) {
-                        field.value = userData[field.id];
-                    }
-                });
-
-                updateProgress();
-            } else {
-                console.log("⚠️ No profile data found for email:", userEmail);
-            }
+            await fetchUserData(userEmail);
         } else {
             console.log("⚠️ No user logged in.");
             localStorage.removeItem("userEmail");  
@@ -62,50 +92,47 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // ✅ Function to calculate profile completion percentage
-    function updateProgress() {
-        if (!progressBar) return;
-
-        let filledFields = 0;
-        fields.forEach(field => {
-            if (field.value.trim() !== "") filledFields++;
-        });
-
-        const completion = Math.round((filledFields / fields.length) * 100);
-        progressBar.style.width = `${completion}%`;
-        progressBar.textContent = `${completion}% Completed`;
-    }
-
-    // ✅ Update progress when fields are edited
-    fields.forEach(field => {
-        field.addEventListener("input", updateProgress);
-    });
-
     // ✅ Save user data to Firestore
     if (saveBtn) {  
         saveBtn.addEventListener("click", async function () {
             const userEmail = localStorage.getItem("userEmail"); 
-
+        
             if (!userEmail) {
                 alert("⚠️ You need to be logged in to save your profile.");
                 return;
             }
-
+        
             let userData = {};
-
             fields.forEach(field => {
-                if (field.value.trim() !== "" && field !== nameField && field !== emailField) {
-                    userData[field.id] = field.value;
+                if (field.id !== "name" && field.id !== "email") {
+                    userData[field.id] = field.value.trim();
                 }
             });
-
+        
             try {
-                await setDoc(doc(db, "users", userEmail), userData, { merge: true }); // ✅ Save using email
+                const userRef = doc(db, "users", userEmail);
+        
+                // ✅ First, fetch the existing data
+                const docSnap = await getDoc(userRef);
+                let existingData = docSnap.exists() ? docSnap.data() : {};
+        
+                // ✅ Merge new data with existing data
+                await setDoc(userRef, { ...existingData, ...userData }, { merge: true });
+        
                 alert("✅ Profile saved successfully!");
-                updateProgress();
+                
+                // ✅ Lock fields after saving
+                fields.forEach(field => {
+                    if (userData[field.id]) {
+                        field.setAttribute("disabled", true);
+                    }
+                });
+        
+                updateProgress(); // ✅ Update progress only after clicking Save
             } catch (error) {
                 console.error("❌ Error saving data:", error);
             }
         });
+        
     }
 });
