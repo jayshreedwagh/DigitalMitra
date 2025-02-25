@@ -32,72 +32,87 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Fetch user data and lock already saved fields
  // ✅ Fetch user data and lock already saved fields
-async function fetchUserData(userEmail) {
-    const userRef = doc(db, "users", userEmail);
-    const docSnap = await getDoc(userRef);
+ async function fetchUserData() {
+    const userDocId = localStorage.getItem("userDocId"); 
 
-    let userData = {};
-
-    if (docSnap.exists()) {
-        userData = docSnap.data();
-        console.log("✅ User data found (by ID):", userData);
-    } else {
-        console.log("⚠️ No user document found by ID, searching by email...");
-        
-        const usersRef = collection(db, "users");
-        const q = query(usersRef, where("email", "==", userEmail));
-        const querySnapshot = await getDocs(q);
-
-        if (!querySnapshot.empty) {
-            const docSnap = querySnapshot.docs[0]; 
-            userData = docSnap.data();
-            console.log("✅ User data found (by email query):", userData);
-        } else {
-            console.log("⚠️ No profile data found for email:", userEmail);
-            return;
-        }
+    if (!userDocId) {
+        console.error("❌ No userDocId found. Redirecting to login...");
+        window.location.href = "login.html";
+        return;
     }
 
-    // ✅ Fill in the fields with saved data
-    nameField.value = userData.name || "N/A";
-    emailField.value = userData.email || userEmail;
-    displayName.textContent = userData.name || "User";
-    displayEmail.textContent = userData.email || userEmail;
+    const userRef = doc(db, "users", userDocId);
+    const docSnap = await getDoc(userRef);
 
+    if (!docSnap.exists()) {
+        console.error("⚠️ No user document found for ID:", userDocId);
+        return;
+    }
+
+    const userData = docSnap.data();
+    console.log("✅ User data loaded:", userData);
+
+    // Ensure elements exist before modifying
+    if (nameField) nameField.value = userData.name || "";
+    if (emailField) emailField.value = userData.email || "";
     nameField.setAttribute("disabled", true);
     emailField.setAttribute("disabled", true);
 
+    // disabling the fields
     fields.forEach(field => {
-        if (userData[field.id]) {
-            field.value = userData[field.id];
-            field.setAttribute("disabled", true); // ✅ Lock fields that are already saved
+        if (field.id !== "name" && field.id !== "email") {
+            if (userData[field.id] && userData[field.id].trim() !== "") {
+                field.value = userData[field.id];
+                field.setAttribute("disabled", true); // Only disable filled fields
+            } else {
+                field.removeAttribute("disabled"); // Keep empty fields editable
+            }
         }
     });
+    
 
     updateProgress();
 }
+
+
 
 
     // ✅ Check for logged-in user
     onAuthStateChanged(auth, async (user) => {
         if (user) {
             const userEmail = user.email;
-            localStorage.setItem("userEmail", userEmail);
             console.log("✅ Logged in as:", userEmail);
-            await fetchUserData(userEmail);
+    
+            // 🛠️ Fetch document ID using the email
+            const usersRef = collection(db, "users");
+            const q = query(usersRef, where("email", "==", userEmail));
+            const querySnapshot = await getDocs(q);
+    
+            if (!querySnapshot.empty) {
+                const userDoc = querySnapshot.docs[0]; // Get the first matching document
+                const userDocId = userDoc.id;
+                localStorage.setItem("userDocId", userDocId);
+                console.log("✅ Stored userDocId:", userDocId);
+    
+                await fetchUserData(); // Call fetchUserData AFTER storing userDocId
+            } else {
+                console.error("⚠️ User document not found!");
+            }
         } else {
             console.log("⚠️ No user logged in.");
-            localStorage.removeItem("userEmail");  
+            localStorage.removeItem("userEmail");
+            localStorage.removeItem("userDocId");
             window.location.href = "login.html"; // Redirect if not logged in
         }
     });
+    
 
     // ✅ Save user data to Firestore
     if (saveBtn) {  
         saveBtn.addEventListener("click", async function () {
-            const userEmail = localStorage.getItem("userEmail"); 
+            const userDocId = localStorage.getItem("userDocId"); 
         
-            if (!userEmail) {
+            if (!userDocId) {
                 alert("⚠️ You need to be logged in to save your profile.");
                 return;
             }
@@ -108,9 +123,9 @@ async function fetchUserData(userEmail) {
                     userData[field.id] = field.value.trim();
                 }
             });
-        
+            
             try {
-                const userRef = doc(db, "users", userEmail);
+                const userRef = doc(db, "users", userDocId);
         
                 // ✅ First, fetch the existing data
                 const docSnap = await getDoc(userRef);
@@ -123,7 +138,7 @@ async function fetchUserData(userEmail) {
                 
                 // ✅ Lock fields after saving
                 fields.forEach(field => {
-                    if (userData[field.id]) {
+                    if (userData[field.id] && field.value.trim() !== "") {
                         field.setAttribute("disabled", true);
                     }
                 });
