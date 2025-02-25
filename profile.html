@@ -12,14 +12,24 @@
         <div class="header">Profile</div>
 
         <!-- Profile Picture Upload -->
-        <div class="profile-pic">
-            <img id="profile-img" src="default-avatar.png" alt="Profile Picture">
-            <input type="file" id="upload-img" accept="image/*">
+        <div class="profile-container">
+            <!-- Profile Picture Section -->
+            <div class="profile-pic">
+                <img id="profile-img" src="default-avatar.png" alt="Profile Picture">
+                <input type="file" id="upload-img" accept="image/*">
+                <button id="edit-photo-btn">Edit Photo</button>
+            </div>
+            
+             <!-- Separator Line -->
+            <div class="separator"></div>
+
+            <!-- Name & Email Section -->
+            <div class="user">
+                <label>Full Name: <input type="text" id="name" readonly></label>
+                <label>Email: <input type="email" id="email" readonly></label>
+            </div>
         </div>
-        <div class="user">
-            <label>Full Name: <input type="text" id="name" readonly></label>
-            <label>Email: <input type="email" id="email" readonly></label>
-        </div>
+        
         <!-- Progress Bar -->
         <div class="progress-container">
             <div class="progress-bar">
@@ -42,14 +52,32 @@
             <label>Age: <input type="number" id="age"></label>
             <label>Date of Birth: <input type="date" id="dob"></label>
             <label>Phone Number: <input type="tel" id="phone"></label>
-          <!-- <label>Address: <input type="text" id="address"></label>
+            <label>Aadhar Number:<input type="number" id="Aadhar"></label>
+            <label>Annual Income:<input type="number" id="Income"></label>
+            <label>Cast:<select id="cast">
+                <option value="">Select</option>
+                <option value="open">Open</option>
+                <option value="obc">OBC</option>
+                <option value="vj">VJ</option>
+                <option value="nta">NT</option>
+                <option value="sc">SC</option>
+                <option value="st">ST</option>
+                <option value="sbc">SBC</option>
+                </select>
+            </label>
+            <label>State:<select id="state">
+                <option value="">Select</option>
+                <option value="Maharastra">Maharastra</option>
+                <option value="Karnataka">Karnataka</option>
+                </select>
+            </label>
+            <label>Address: <input type="text" id="address"></label>
             <label>City: <input type="text" id="city"></label>
             <label>State: <input type="text" id="state"></label>
-            <label>Country: <input type="text" value="India" disabled></label>-->
+            <label>Country: <input type="text" value="India" readonly></label>
         </div>
 
         <button class="save-btn" id="save-btn">Save</button>
-        <button class="next-btn" id="next-btn">Next⮕</button>
     </div>
 
     <script type="module" src="profile.js"></script>
