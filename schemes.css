@@ -23,3 +23,17 @@
 .apply-btn:hover {
     background: #0056b3;
 }
+/* Hide Google Translate top banner */
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+/* Hide the sticky Google Translate bar */
+body > .skiptranslate {
+    display: none !important;
+}
+
+/* Prevent page shifting when Google tries to add the bar */
+body {
+    top: 0px !important;
+}
