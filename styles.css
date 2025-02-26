@@ -666,3 +666,37 @@ h1 {
     height: 2px; /* Underline thickness */
     background-color: white; /* Underline color */
 }
+.custom-language-dropdown select {
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #007bff;
+    padding: 5px 8px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Dropdown Arrow Customization */
+.custom-language-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-language-dropdown select {
+    appearance: none;  /* Remove default dropdown styling */
+    padding-right: 30px;
+}
+
+/* Custom dropdown arrow */
+.custom-language-dropdown::after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #007bff;
+    pointer-events: none;
+}
