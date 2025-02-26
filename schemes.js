@@ -409,8 +409,349 @@ const schemes = [
     ],
     link: "https://example.gov.in/pmsym"
   },
+    {
+      title: "PM-Kisan Credit Card",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Small and marginal farmers.",
+        "2) Tenant farmers, oral lessees, and sharecroppers.",
+        "3) Self-help groups or joint liability groups of farmers."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Credit support for cultivation expenses.",
+        "2) Credit for farm machinery and other agricultural investments.",
+        "3) Collateral-free loans up to a specified limit."
+      ],
+      category: "Agriculture",
+      link: "https://pmkisan.gov.in"
+    },
+    {
+      title: "National Rural Livelihood Mission",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Rural women from poor households.",
+        "2) Priority to SC/ST, minorities, and disabled.",
+        "3) Self-help groups in rural areas."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Financial assistance to start micro-enterprises.",
+        "2) Interest subvention on loans.",
+        "3) Skill development and training programs."
+      ],
+      category: "Rural Development",
+      link: "https://aajeevika.gov.in"
+    },
+    {
+      title: "Pradhan Mantri Fasal Bima Yojana",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Farmers growing notified crops in notified areas.",
+        "2) Both loanee and non-loanee farmers can enroll.",
+        "3) Farmers of all land holdings."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Comprehensive risk coverage for pre-sowing to post-harvest losses.",
+        "2) Low premium rates - 2% for Kharif, 1.5% for Rabi crops.",
+        "3) Full insurance coverage without capping of sum insured."
+      ],
+      category: "Agriculture",
+      link: "https://pmfby.gov.in"
+    },
+    {
+      title: "Vidya Lakshmi Portal",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Indian students seeking education loans for higher studies.",
+        "2) Students who have secured admission in educational institutions in India or abroad.",
+        "3) Students meeting the specific eligibility criteria of participating banks."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Single window for education loan applications to multiple banks.",
+        "2) Comprehensive information about education loan schemes.",
+        "3) Access to scholarship information."
+      ],
+      category: "Education",
+      link: "https://www.vidyalakshmi.co.in"
+    },
+    {
+      title: "Rashtriya Swasthya Bima Yojana",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Below Poverty Line (BPL) families.",
+        "2) Unorganized sector workers.",
+        "3) MGNREGA workers who have worked for more than 15 days."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Health insurance coverage up to ₹30,000 per family per year.",
+        "2) Cashless hospitalization at empaneled hospitals.",
+        "3) Transportation allowance."
+      ],
+      category: "Healthcare",
+      link: "https://www.india.gov.in/spotlight/rashtriya-swasthya-bima-yojana"
+    },
+    {
+      title: "Solar Subsidies Scheme",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Residential homeowners.",
+        "2) Rural and urban beneficiaries.",
+        "3) Commercial and industrial establishments in specific categories."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Subsidy of up to 40% for rooftop solar installations.",
+        "2) Additional incentives from state governments.",
+        "3) Reduced electricity bills and carbon footprint."
+      ],
+      category: "Energy",
+      link: "https://mnre.gov.in"
+    },
+    {
+      title: "Pradhan Mantri Suraksha Bima Yojana",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Indian citizens aged 18-70 years.",
+        "2) Must have a bank account linked to Aadhaar.",
+        "3) Can be enrolled through auto-debit facility."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Accidental death and disability cover of ₹2 lakh.",
+        "2) Annual premium of only ₹12.",
+        "3) Simple enrollment process through banks."
+      ],
+      category: "Insurance",
+      link: "https://www.jansuraksha.gov.in"
+    },
+    {
+      title: "Pradhan Mantri Vaya Vandana Yojana",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Indian citizens aged 60 years and above.",
+        "2) No maximum age limit for entry.",
+        "3) Must be able to invest the minimum required amount."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Assured pension of 8% per annum.",
+        "2) Pension paid monthly, quarterly, half-yearly or yearly.",
+        "3) Loan facility available during the policy term."
+      ],
+      category: "Social Security",
+      link: "https://licindia.in/Products/Pension-Plans/Pradhan-Mantri-Vaya-Vandana-Yojana"
+    },
+    {
+      title: "Rashtriya Krishi Vikas Yojana",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) State governments implementing agricultural projects.",
+        "2) Farmers groups and cooperatives through state plans.",
+        "3) Rural communities involved in agriculture."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Financial assistance for agriculture infrastructure development.",
+        "2) Support for quality seed production and distribution.",
+        "3) Funding for innovative agricultural projects."
+      ],
+      category: "Agriculture",
+      link: "https://rkvy.nic.in"
+    },
+    {
+      title: "Pradhan Mantri Matru Vandana Yojana",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Pregnant and lactating women for first live birth.",
+        "2) Must be at least 19 years of age.",
+        "3) Registered at the Anganwadi center."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Cash benefit of ₹5,000 in three installments.",
+        "2) Compensation for wage loss during pregnancy.",
+        "3) Improved access to healthcare and nutrition."
+      ],
+      category: "Healthcare",
+      link: "https://pmmvy-cas.nic.in"
+    },
+    {
+      title: "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Rural youth aged 15-35 years.",
+        "2) Priority to SC/ST, women, and minorities.",
+        "3) Minimum qualification varies by training program."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Free skill development training.",
+        "2) Placement assistance for trained youth.",
+        "3) Post-placement support and tracking."
+      ],
+      category: "Skill Development",
+      link: "https://ddugky.gov.in"
+    },
+    {
+      title: "Pradhan Mantri Kaushal Vikas Yojana",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Indian citizens aged 15-45 years.",
+        "2) School/college dropouts and unemployed youth.",
+        "3) Workers seeking certification for skills."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Free short-term skill training.",
+        "2) Industry-relevant curriculum.",
+        "3) Monetary reward on successful completion and certification."
+      ],
+      category: "Skill Development",
+      link: "https://pmkvyofficial.org"
+    },
+    {
+      title: "Anganwadi Services Scheme",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Children below 6 years of age.",
+        "2) Pregnant women and lactating mothers.",
+        "3) Adolescent girls in specified areas."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Supplementary nutrition for children and mothers.",
+        "2) Immunization and health check-ups.",
+        "3) Pre-school education for children aged 3-6 years."
+      ],
+      category: "Child Development",
+      link: "https://wcd.nic.in"
+    },
+    {
+      title: "Beti Bachao Beti Padhao",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Girl children and their families.",
+        "2) Communities with declining child sex ratio.",
+        "3) Educational institutions promoting girl child education."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Initiatives to prevent gender-biased sex selection.",
+        "2) Support for girls' education.",
+        "3) Awareness campaigns on gender equality."
+      ],
+      category: "Gender Equality",
+      link: "https://www.betibachaobetipadhao.co.in"
+    },
+    {
+      title: "National Food Security Mission",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Farmers in the selected districts.",
+        "2) Special focus on small and marginal farmers.",
+        "3) Districts with low productivity but high potential."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Distribution of high-yielding variety seeds.",
+        "2) Demonstration of improved production technology.",
+        "3) Supply of agricultural inputs at subsidized rates."
+      ],
+      category: "Agriculture",
+      link: "https://nfsm.gov.in"
+    },
+    {
+      title: "Credit Linked Capital Subsidy Scheme",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Micro and small enterprises.",
+        "2) Existing or new enterprises undertaking technology upgradation.",
+        "3) Enterprises in manufacturing sectors as per specified list."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) 15% capital subsidy on eligible investments.",
+        "2) Maximum subsidy limit of ₹15 lakhs.",
+        "3) Technology upgradation support."
+      ],
+      category: "Industry",
+      link: "https://clcss.dcmsme.gov.in"
+    },
+    {
+      title: "Mid-Day Meal Scheme",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Students in government and government-aided schools.",
+        "2) Primary and upper primary classes (Class I to VIII).",
+        "3) Schools must have kitchen facilities."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Free hot cooked meal on school days.",
+        "2) Nutritional support to enhance enrollment and attendance.",
+        "3) Improved nutrition levels among children."
+      ],
+      category: "Education",
+      link: "https://mdm.nic.in"
+    },
+    {
+      title: "Integrated Child Development Services",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Children under 6 years of age.",
+        "2) Pregnant and lactating mothers.",
+        "3) Women aged 15-44 years."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Supplementary nutrition.",
+        "2) Immunization and health check-ups.",
+        "3) Referral services and pre-school education."
+      ],
+      category: "Child Development",
+      link: "https://icds-wcd.nic.in"
+    },
+    {
+      title: "National Rural Health Mission",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) Rural population across India.",
+        "2) Special focus on 18 states with weak health infrastructure.",
+        "3) Vulnerable sections of society."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Improved healthcare access in rural areas.",
+        "2) Strengthened public health systems.",
+        "3) Community participation in healthcare planning."
+      ],
+      category: "Healthcare",
+      link: "https://nhm.gov.in"
+    },
+    {
+      title: "Digital India Land Records Modernization Programme",
+      t1: "Eligibility :",
+      eligibility: [
+        "1) All landowners.",
+        "2) State governments implementing the program.",
+        "3) Gram panchayats and local bodies."
+      ],
+      t2: "Benefits :",
+      benefits: [
+        "1) Computerization of land records.",
+        "2) Modernization of land registration process.",
+        "3) Updated maps using modern survey techniques."
+      ],
+      category: "Land Governance",
+      link: "https://dilrmp.gov.in"
+    }
+  ];
   // ... other schemes ...
-];
+
 function renderSchemes(filteredSchemes) {
   const schemesGrid = document.querySelector('.schemes-grid');
   schemesGrid.innerHTML = '';
