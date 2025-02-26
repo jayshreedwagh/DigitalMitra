@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Schemes-DigitalMitra</title>
+    <title>Your Schemes - DigitalMitra</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="recommendation.css">
 </head>
 <body>
     <header>
@@ -21,7 +22,7 @@
                     <li><a href="services.html" class="nav-link">Services</a></li>
                     <li><a href="contactus.html" class="nav-link">Contact Us</a></li>
                     <li><a href="schemes.html" class="nav-link">Schemes</a></li>
-                    <li><a href="reccomendation.html"class=nav-link>Your Schemes</a></li>
+                    <li><a href="reccomendation.html" class="nav-link">Your Schemes</a></li>
                     <div class="custom-language-dropdown">
                         <select id="customLanguageSelector" onchange="changeLanguage(this.value)">
                             <option value="">Select Language</option>
@@ -34,10 +35,9 @@
                             <option value="gu">ગુજરાતી (Gujarati)</option>
                             <option value="ur">اردو (Urdu)</option>
                         </select>
-                      </div>
+                    </div>
                 </ul>
             </div>
-            <!-- Profile Icon -->
             <div class="profile-container">
                 <a href="profile.html">
                     <img src="default-avatar.jpg" id="profile-icon" alt="Profile">
@@ -45,6 +45,44 @@
             </div>
         </nav>
     </header>
+    <div class="toggle-container">
+        <h1>Your Schemes</h1>
+        <label class="switch">
+            <input type="checkbox" id="schemeToggle">
+            <span class="slider"></span>
+        </label>
+        <span id="toggleText">Recommended Schemes</span>
+    </div>
+    
+    
+    <div class="search-filter">
+        <input type="text" id="searchBar" placeholder="Search schemes...">
+        <select id="categoryFilter">
+            <option value="all">All Categories</option>
+            <option value="education">Education</option>
+            <option value="business">Business</option>
+            <option value="agriculture">Agriculture</option>
+        </select>
+    </div>
+    
+    <div id="recommendedSchemes" class="scheme-container">
+        <div class="scheme-card">
+            <h3>PM Scholarship Scheme</h3>
+            <p>📝 Provides financial aid for students pursuing higher education.</p>
+            <p>🏩 Issued by: Government of India</p>
+            <button>More Details</button>
+        </div>
+    </div>
+    
+    <div id="appliedSchemes" class="scheme-container hidden">
+        <div class="scheme-card">
+            <h3>Startup India</h3>
+            <p>✅ Status: Approved</p>
+            <p>🏩 Issued by: Government of India</p>
+            <button>View Application</button>
+        </div>
+    </div>
+    <script type="module" src="recommendation.js"></script>
     <script type="module" src="popup.js"></script>
     <script type="module" src="schemes.js"></script>
     <script type="module" src="script.js"></script>
