@@ -3,6 +3,10 @@ import { doc, getDoc, setDoc, collection, query, where, getDocs } from "https://
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    const loader = document.getElementById("loader");
+    loader.style.display = "flex"; // 🔹 Ensure loader is visible on page load
+
     const fields = document.querySelectorAll("input:not(#upload-img), select"); // Excluding file input
     const saveBtn = document.getElementById("save-btn");
     const progressBar = document.getElementById("progress");
@@ -49,6 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     async function fetchUserData() {
+        const loader = document.getElementById("loader");
+        loader.style.display = "flex"; // 🔹 Show loader at the start
+    
         const userDocId = localStorage.getItem("userDocId");
         if (!userDocId) {
             console.log("⚠️ No userDocId found. Redirecting to login...");
@@ -61,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!docSnap.exists()) {
             console.log("⚠️ No user document found in Firestore.");
+            loader.style.display = "none"; // 🔹 Hide loader if no data
             return;
         }
 
@@ -85,8 +93,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             console.log("⚠️ No profile image found in Firestore.");
         }
-
-        setTimeout(updateProgress, 500); // Ensure all data is set before calling updateProgress
+        setTimeout(() => {
+            updateProgress();
+            loader.style.display = "none"; // 🔹 Hide loader after loading
+        }, 500);
+    
+ // Ensure all data is set before calling updateProgress
     }
 
     fetchUserData();
