@@ -17,15 +17,15 @@
     <span class="text">
       DigitalMitra
       <p class="text2"> Empowering Citizens with Digital Access</p>
-
     </span>
   </div>
+  
   <header>
     <nav>
         <div class="nav-links">
             <ul>
               <div class="custom-language-dropdown">
-                <select id="customLanguageSelector" onchange="changeLanguage()">
+                <select id="customLanguageSelector" onchange="changeLanguage(this.value)">
                     <option value="">Select Language</option>
                     <option value="en">English</option>
                     <option value="hi">हिन्दी (Hindi)</option>
@@ -36,95 +36,57 @@
                     <option value="gu">ગુજરાતી (Gujarati)</option>
                     <option value="ur">اردو (Urdu)</option>
                 </select>
-            </div>
+              </div>
             </ul>
         </div>
-        <!-- Profile Icon -->
-        
     </nav>
-</header>
-
+  </header>
 
   <div class="carousel-wrapper">
     <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
-            <!-- The first and last slides will be clones for smooth infinite loop -->
-            <div class="carousel-slide">
-              <img src="2.png" alt="Last Clone">
-           </div>
-            <div class="carousel-slide">
-                <img src="4.png" alt="Last Clone">
-            </div>
-            <div class="carousel-slide">
-                <img src="11.jpg" alt="Image 1">
-            </div>
-            <div class="carousel-slide">
-                <img src="22.webp" alt="Image 2">
-            </div>
-            <div class="carousel-slide">
-                <img src="66.jpg" alt="Image 3">
-            </div>
-            <div class="carousel-slide">
-                <img src="44.jpg" alt="Image 4">
-            </div>
-            <div class="carousel-slide">
-              <img src="55.jpg" alt="Image 4">
-           </div>
-           <div class="carousel-slide">
-            <img src="77.jpg" alt="Image 4">
-         </div>
-            <div class="carousel-slide">
-                <img src="2.jpg" alt="First Clone">
-            </div>
+            <div class="carousel-slide"><img src="2.png" alt="Last Clone"></div>
+            <div class="carousel-slide"><img src="4.png" alt="Image 1"></div>
+            <div class="carousel-slide"><img src="11.jpg" alt="Image 2"></div>
+            <div class="carousel-slide"><img src="22.webp" alt="Image 3"></div>
+            <div class="carousel-slide"><img src="66.jpg" alt="Image 4"></div>
+            <div class="carousel-slide"><img src="44.jpg" alt="Image 5"></div>
+            <div class="carousel-slide"><img src="55.jpg" alt="Image 6"></div>
+            <div class="carousel-slide"><img src="77.jpg" alt="Image 7"></div>
+            <div class="carousel-slide"><img src="2.jpg" alt="First Clone"></div>
         </div>
     </div>
-
     <button class="carousel-button carousel-button-prev" id="prevButton">←</button>
     <button class="carousel-button carousel-button-next" id="nextButton">→</button>
-
-
   </div>
 
   <section class="features">
-    <div class="feature-card">
-        <img src="d.webp" alt="Digital Services">
-        <h3>Digital Services</h3>
-        <p>Access various government services online through a single platform</p>
-    </div>
-    <div class="feature-card">
-        <img src="s.webp" alt="Secure Access">
-        <h3>Secure Access</h3>
-        <p>State-of-the-art security measures to protect your data</p>
-    </div>
-    <div class="feature-card">
-        <img src="secure.webp" alt="24/7 Support">
-        <h3>24/7 Support</h3>
-        <p>Round-the-clock assistance for all your digital needs</p>
-    </div>
+    <div class="feature-card"><img src="d.webp" alt="Digital Services"><h3>Digital Services</h3><p>Access various government services online through a single platform</p></div>
+    <div class="feature-card"><img src="s.webp" alt="Secure Access"><h3>Secure Access</h3><p>State-of-the-art security measures to protect your data</p></div>
+    <div class="feature-card"><img src="secure.webp" alt="24/7 Support"><h3>24/7 Support</h3><p>Round-the-clock assistance for all your digital needs</p></div>
   </section>
-  
-    
-    
-    <section class="auth-buttons">
+
+  <section class="auth-buttons">
       <button onclick="window.location.href='login.html'">Login</button>
       <button onclick="window.location.href='register.html'">Register</button>
-      
-    </section>
-   
+  </section>
+
   <div class="contact-info">
     <h2>Our Office</h2>
     <p>📍 DigitalMitra HQ, New Delhi, India</p>
     <p>📞 Phone: +91 9067460129</p>
     <p>📧 Email: support@digitalmitra.com</p>
   </div>
-  <footer>
-    <p>&copy; 2025 DigitalMitra. All rights reserved.</p>
-  </footer>
+
+  <footer><p>&copy; 2025 DigitalMitra. All rights reserved.</p></footer>
+
+  <script type="module" src="script.js"></script>
+  <script type="module" src="chatbot.js"></script>
+
+  <!-- Hidden Google Translate -->
+  <div id="google_translate_element" style="display: none;"></div>
   
-    <script type="module" src="script.js"></script>
-    <script type="module" src="chatbot.js"></script>
-    <div id="google_translate_element" style="display: none;"></div>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script src="language.js"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="language.js"></script>
 </body>
 </html>

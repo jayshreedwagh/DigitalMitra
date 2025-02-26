@@ -1,41 +1,19 @@
 function googleTranslateElementInit() {
-    new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    new google.translate.TranslateElement(
+        { pageLanguage: 'en', autoDisplay: false },
+        'google_translate_element'
+    );
 }
 
-// Function to change language and store it
-function changeLanguage() {
-    var languageSelector = document.getElementById("customLanguageSelector");
-    var selectedLanguage = languageSelector.value;
+function changeLanguage(lang) {
+    if (lang === "") return; // If no language selected, do nothing
 
-    if (selectedLanguage) {
-        localStorage.setItem("selectedLanguage", selectedLanguage);
-        applyStoredLanguage();
+    // Find the Google Translate dropdown and change its value
+    let googleDropdown = document.querySelector(".goog-te-combo");
+    if (googleDropdown) {
+        googleDropdown.value = lang; // Set selected language
+        googleDropdown.dispatchEvent(new Event("change")); // Trigger translation
+    } else {
+        console.error("Google Translate dropdown not found.");
     }
 }
-
-// Function to apply stored language
-function applyStoredLanguage() {
-    var storedLanguage = localStorage.getItem("selectedLanguage");
-
-    if (storedLanguage) {
-        var languageSelector = document.getElementById("customLanguageSelector");
-        if (languageSelector) {
-            languageSelector.value = storedLanguage;
-        }
-
-        // Wait for Google Translate to load before applying language
-        var checkExist = setInterval(function () {
-            var googleTranslateDropdown = document.querySelector(".goog-te-combo");
-            if (googleTranslateDropdown) {
-                googleTranslateDropdown.value = storedLanguage;
-                googleTranslateDropdown.dispatchEvent(new Event('change')); // Simulate user selection
-                clearInterval(checkExist);
-            }
-        }, 500); // Check every 500ms until it's found
-    }
-}
-
-// Ensure language selection persists on all pages
-document.addEventListener("DOMContentLoaded", function () {
-    setTimeout(applyStoredLanguage, 1500); // Ensure Google Translate has enough time to initialize
-});
