@@ -314,13 +314,15 @@ function initializeDigitalMitra() {
       isLoggedIn = true;
       sessionStorage.setItem('digitalMitraLoginState', 'true');
       
-      // Provide response for logged in users
+      // Provide response for logged in users and ask about profile completion
       const loggedInMessage = currentLanguage === 'english' 
-        ? "Great! You can access your order history, saved items, and personalized recommendations. How can I help you today?"
-        : "छान! आपण आपला ऑर्डर इतिहास, सेव्ह केलेल्या वस्तू आणि वैयक्तिकृत शिफारसी ऍक्सेस करू शकता. मी आज आपली कशी मदत करू शकतो?";
+        ? "Great! Did you complete your profile? (Please respond with 'yes' or 'no')"
+        : "छान! तुम्ही तुमची प्रोफाइल पूर्ण केली आहे का? (कृपया 'हो' किंवा 'नाही' सह प्रतिसाद द्या)";
       
       setTimeout(() => {
         addMessageToChat('bot', loggedInMessage);
+        isProfileQuestionAsked = true;
+        sessionStorage.setItem('digitalMitraProfileAsked', 'true');
       }, 500);
     } 
     else if (normalizedResponse === 'no' || normalizedResponse === 'n' || 
@@ -330,12 +332,16 @@ function initializeDigitalMitra() {
       
       // Provide response for non-logged in users
       const notLoggedInMessage = currentLanguage === 'english' 
-        ? "No problem! first login/register to our website. are you done logging in?"
-        : "काही समस्या नाही! प्रथम आमच्या वेबसाइटवर लॉगिन/नोंदणी करा. तुम्ही लॉगिन पूर्ण केले का?";
+        ? "Sorry, you need to login first before proceeding. Please login to our website. Let me know when you're done by responding with 'yes'."
+        : "क्षमस्व, पुढे जाण्यापूर्वी आपल्याला प्रथम लॉगिन करणे आवश्यक आहे. कृपया आमच्या वेबसाइटवर लॉगिन करा. जेव्हा आपण पूर्ण केले असेल तेव्हा मला 'हो' म्हणून प्रतिसाद द्या.";
       
       setTimeout(() => {
         addMessageToChat('bot', notLoggedInMessage);
-        isProfileQuestionAsked = true;
+        
+        // Set login as asked to false since we're asking a different question now
+        isLoginAsked = false;
+        isProfileQuestionAsked = true; // Treat the next response as a profile response
+        sessionStorage.setItem('digitalMitraLoginAsked', 'false');
         sessionStorage.setItem('digitalMitraProfileAsked', 'true');
       }, 500);
     } 
@@ -358,13 +364,36 @@ function initializeDigitalMitra() {
   function handleProfileResponse(response) {
     const normalizedResponse = response.toLowerCase();
     
+    // If the user was not logged in and now says they've logged in
+    if (isLoggedIn === false && (normalizedResponse === 'yes' || normalizedResponse === 'y' || 
+        normalizedResponse === 'हो' || normalizedResponse === 'होय')) {
+      
+      // They've now logged in, update state
+      isLoggedIn = true;
+      sessionStorage.setItem('digitalMitraLoginState', 'true');
+      
+      // Now ask about profile completion
+      const profileQuestion = currentLanguage === 'english' 
+        ? "Great! Now that you're logged in, did you complete your profile? (Please respond with 'yes' or 'no')"
+        : "छान! आता तुम्ही लॉग इन केले आहे, तुम्ही तुमची प्रोफाइल पूर्ण केली आहे का? (कृपया 'हो' किंवा 'नाही' सह प्रतिसाद द्या)";
+      
+      setTimeout(() => {
+        addMessageToChat('bot', profileQuestion);
+        // Keep isProfileQuestionAsked true
+        sessionStorage.setItem('digitalMitraProfileAsked', 'true');
+      }, 500);
+      
+      return; // Exit the function early
+    }
+    
+    // Regular profile response handling for logged in users
     if (normalizedResponse === 'yes' || normalizedResponse === 'y' || 
         normalizedResponse === 'हो' || normalizedResponse === 'होय') {
       
-      // Provide response for users who completed login
+      // Response for users who completed profile
       const profileCompletionMessage = currentLanguage === 'english' 
-        ? "Great! Then complete your profile after that you can see all government schemes which are applicable for you in your scheme! Do you have any further questions?"
-        : "छान! नंतर आपली प्रोफाइल पूर्ण करा, त्यानंतर आपल्यासाठी लागू असलेल्या सर्व सरकारी योजना तुम्ही पाहू शकता. तुम्हाला आणखी काही प्रश्न आहेत का?";
+        ? "Great! Now you can see all schemes applicable for you in my scheme!"
+        : "छान! आता तुम्ही माझ्या योजनेमध्ये तुमच्यासाठी लागू असलेल्या सर्व योजना पाहू शकता!";
       
       setTimeout(() => {
         addMessageToChat('bot', profileCompletionMessage);
@@ -375,15 +404,15 @@ function initializeDigitalMitra() {
     else if (normalizedResponse === 'no' || normalizedResponse === 'n' || 
              normalizedResponse === 'नाही') {
       
-      // Provide response for users who haven't completed login
-      const notCompletedLoginMessage = currentLanguage === 'english' 
-        ? "No problem! You can view all features in our website! But to view the schemes which are applicable for you, first you need to complete your profile."
-        : "काही समस्या नाही! तुम्ही आमच्या वेबसाइटवरील सर्व वैशिष्ट्ये पाहू शकता! पण तुमच्यासाठी लागू असलेल्या योजना पाहण्यासाठी, प्रथम तुम्हाला तुमची प्रोफाइल पूर्ण करावी लागेल.";
+      // Response for users who haven't completed profile
+      const notCompletedProfileMessage = currentLanguage === 'english' 
+        ? "No problem! You can view all features in our website! But to see applicable schemes for you, first complete your profile. Let me know when you've completed it by responding with 'yes'."
+        : "काही समस्या नाही! तुम्ही आमच्या वेबसाइटवरील सर्व वैशिष्ट्ये पाहू शकता! परंतु तुमच्यासाठी लागू असलेल्या योजना पाहण्यासाठी, प्रथम तुमची प्रोफाइल पूर्ण करा. जेव्हा आपण ते पूर्ण केले असेल तेव्हा मला 'हो' म्हणून सांगा.";
       
       setTimeout(() => {
-        addMessageToChat('bot', notCompletedLoginMessage);
-        isProfileQuestionAsked = false; // Reset to handle regular queries
-        sessionStorage.setItem('digitalMitraProfileAsked', 'false');
+        addMessageToChat('bot', notCompletedProfileMessage);
+        // Keep isProfileQuestionAsked true to keep checking
+        sessionStorage.setItem('digitalMitraProfileAsked', 'true');
       }, 500);
     } 
     else {
