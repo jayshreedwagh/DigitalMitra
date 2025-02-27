@@ -88,10 +88,51 @@ function initializeDigitalMitra() {
     chatToggle.style.display = chatbotContainer.classList.contains('hidden') ? 'flex' : 'none';
     
     // If opening the chat for the first time, show welcome message
-    if (!chatbotContainer.classList.contains('hidden') && 
-        !chatbotContainer.hasAttribute('data-initialized')) {
+    if (!chatbotContainer.classList.contains('hidden')) {
       const chatMessages = document.querySelector('.chat-messages');
-      if (chatMessages.children.length === 0) {
+      
+      // Load saved chat from sessionStorage if available
+      const savedChat = sessionStorage.getItem('digitalMitraChat');
+      const savedLanguage = sessionStorage.getItem('digitalMitraLanguage');
+      const savedLoginState = sessionStorage.getItem('digitalMitraLoginState');
+      const savedLoginAsked = sessionStorage.getItem('digitalMitraLoginAsked');
+      const savedProfileAsked = sessionStorage.getItem('digitalMitraProfileAsked');
+      
+      if (savedChat && chatMessages.innerHTML === '') {
+        chatMessages.innerHTML = savedChat;
+        
+        // Restore language state
+        if (savedLanguage) {
+          currentLanguage = savedLanguage;
+          document.querySelectorAll('.lang-btn').forEach(btn => {
+            if (btn.getAttribute('data-lang') === savedLanguage) {
+              btn.classList.add('active');
+            } else {
+              btn.classList.remove('active');
+            }
+          });
+        }
+        
+        // Restore conversation state variables
+        if (savedLoginState) {
+          isLoggedIn = savedLoginState === 'true' ? true : 
+                       savedLoginState === 'false' ? false : null;
+        }
+        
+        if (savedLoginAsked) {
+          isLoginAsked = savedLoginAsked === 'true';
+        }
+        
+        if (savedProfileAsked) {
+          isProfileQuestionAsked = savedProfileAsked === 'true';
+        }
+        
+        // Update input placeholder based on language
+        const inputPlaceholder = currentLanguage === 'english' ? 
+          "Ask me anything..." : "मला काहीही विचारा...";
+        document.getElementById('user-input').placeholder = inputPlaceholder;
+      } 
+      else if (chatMessages.children.length === 0) {
         showWelcomeMessage();
       }
       chatbotContainer.setAttribute('data-initialized', 'true');
@@ -120,12 +161,44 @@ function initializeDigitalMitra() {
   let isLoggedIn = null;
   let isProfileQuestionAsked = false;
   
+  // Check for saved state in sessionStorage
+  const savedLanguage = sessionStorage.getItem('digitalMitraLanguage');
+  if (savedLanguage && digitalMitraConfig.languages.includes(savedLanguage)) {
+    currentLanguage = savedLanguage;
+  }
+  
+  const savedLoginAsked = sessionStorage.getItem('digitalMitraLoginAsked');
+  if (savedLoginAsked) {
+    isLoginAsked = savedLoginAsked === 'true';
+  }
+  
+  const savedLoginState = sessionStorage.getItem('digitalMitraLoginState');
+  if (savedLoginState) {
+    isLoggedIn = savedLoginState === 'true' ? true : 
+                 savedLoginState === 'false' ? false : null;
+  }
+  
+  const savedProfileAsked = sessionStorage.getItem('digitalMitraProfileAsked');
+  if (savedProfileAsked) {
+    isProfileQuestionAsked = savedProfileAsked === 'true';
+  }
+  
   // Language toggle functionality
   document.querySelectorAll('.lang-btn').forEach(btn => {
+    // Set initial active state based on saved language
+    if (btn.getAttribute('data-lang') === currentLanguage) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+    
     btn.addEventListener('click', () => {
       document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentLanguage = btn.getAttribute('data-lang');
+      
+      // Save language selection to sessionStorage
+      sessionStorage.setItem('digitalMitraLanguage', currentLanguage);
       
       // Update placeholder text based on language
       const inputPlaceholder = currentLanguage === 'english' ? 
@@ -136,6 +209,11 @@ function initializeDigitalMitra() {
       isLoginAsked = false;
       isLoggedIn = null;
       isProfileQuestionAsked = false;
+      
+      // Update the session storage
+      sessionStorage.setItem('digitalMitraLoginAsked', 'false');
+      sessionStorage.setItem('digitalMitraLoginState', '');
+      sessionStorage.setItem('digitalMitraProfileAsked', 'false');
       
       // Show welcome message in new language
       showWelcomeMessage();
@@ -191,6 +269,14 @@ function initializeDigitalMitra() {
     
     // Auto scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Save chat history to sessionStorage
+    sessionStorage.setItem('digitalMitraChat', chatMessages.innerHTML);
+    sessionStorage.setItem('digitalMitraLoginAsked', isLoginAsked.toString());
+    sessionStorage.setItem('digitalMitraProfileAsked', isProfileQuestionAsked.toString());
+    if (isLoggedIn !== null) {
+      sessionStorage.setItem('digitalMitraLoginState', isLoggedIn.toString());
+    }
   }
   
   function showWelcomeMessage() {
@@ -214,6 +300,7 @@ function initializeDigitalMitra() {
         
         addMessageToChat('bot', loginQuestion);
         isLoginAsked = true;
+        sessionStorage.setItem('digitalMitraLoginAsked', 'true');
       }, 800);
     }, 300);
   }
@@ -225,6 +312,7 @@ function initializeDigitalMitra() {
     if (normalizedResponse === 'yes' || normalizedResponse === 'y' || 
         normalizedResponse === 'हो' || normalizedResponse === 'होय') {
       isLoggedIn = true;
+      sessionStorage.setItem('digitalMitraLoginState', 'true');
       
       // Provide response for logged in users
       const loggedInMessage = currentLanguage === 'english' 
@@ -238,6 +326,7 @@ function initializeDigitalMitra() {
     else if (normalizedResponse === 'no' || normalizedResponse === 'n' || 
              normalizedResponse === 'नाही') {
       isLoggedIn = false;
+      sessionStorage.setItem('digitalMitraLoginState', 'false');
       
       // Provide response for non-logged in users
       const notLoggedInMessage = currentLanguage === 'english' 
@@ -247,6 +336,7 @@ function initializeDigitalMitra() {
       setTimeout(() => {
         addMessageToChat('bot', notLoggedInMessage);
         isProfileQuestionAsked = true;
+        sessionStorage.setItem('digitalMitraProfileAsked', 'true');
       }, 500);
     } 
     else {
@@ -261,6 +351,7 @@ function initializeDigitalMitra() {
       
       // Keep isLoggedIn as null to ask again
       isLoggedIn = null;
+      sessionStorage.setItem('digitalMitraLoginState', '');
     }
   }
   
@@ -278,6 +369,7 @@ function initializeDigitalMitra() {
       setTimeout(() => {
         addMessageToChat('bot', profileCompletionMessage);
         isProfileQuestionAsked = false; // Reset to handle regular queries
+        sessionStorage.setItem('digitalMitraProfileAsked', 'false');
       }, 500);
     } 
     else if (normalizedResponse === 'no' || normalizedResponse === 'n' || 
@@ -291,6 +383,7 @@ function initializeDigitalMitra() {
       setTimeout(() => {
         addMessageToChat('bot', notCompletedLoginMessage);
         isProfileQuestionAsked = false; // Reset to handle regular queries
+        sessionStorage.setItem('digitalMitraProfileAsked', 'false');
       }, 500);
     } 
     else {
@@ -305,6 +398,7 @@ function initializeDigitalMitra() {
       
       // Keep asking the profile question
       isProfileQuestionAsked = true;
+      sessionStorage.setItem('digitalMitraProfileAsked', 'true');
     }
   }
 }
@@ -353,6 +447,22 @@ window.DigitalMitra = {
     } else {
       chatbotContainer.classList.toggle('hidden');
       chatToggle.style.display = chatbotContainer.classList.contains('hidden') ? 'flex' : 'none';
+    }
+    
+    return true;
+  },
+  
+  // Add method to clear chat history
+  clearChatHistory: function() {
+    sessionStorage.removeItem('digitalMitraChat');
+    sessionStorage.removeItem('digitalMitraLanguage');
+    sessionStorage.removeItem('digitalMitraLoginState');
+    sessionStorage.removeItem('digitalMitraLoginAsked');
+    sessionStorage.removeItem('digitalMitraProfileAsked');
+    
+    const chatMessages = document.querySelector('.chat-messages');
+    if (chatMessages) {
+      chatMessages.innerHTML = '';
     }
     
     return true;
