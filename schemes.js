@@ -118,7 +118,7 @@ const schemes = [
       "Tax exemption under Section 80C.",
       "Partial withdrawal allowed for education and marriage."
     ],
-    link: "https://www.indiapost.gov.in/Financial/Pages/Content/Sukanya-Samriddhi-Account.aspx"
+    link: "https://www.nsiindia.gov.in/(S(dkeb05r4i2fiof55eudn4nyo))/InternalPage.aspx?Id_Pk=89"
   },
   {
     title: "PM Mudra Yojana",
@@ -186,7 +186,7 @@ const schemes = [
       "Government co-contribution for eligible subscribers.",
       "Death benefits to spouse or nominee."
     ],
-    link: "https://www.apyscheme.in/"
+    link: "https://www.npscra.nsdl.co.in/scheme-details.php"
   },
   {
     title: "PM Jan Dhan Yojana",
@@ -219,7 +219,7 @@ const schemes = [
       "Certifications recognized by employers.",
       "Enhances job opportunities and self-employment potential."
     ],
-    link: "https://www.skillindia.gov.in/"
+    link: "https://skillindiamission.in/"
   },
   {
     title: "Digital India",
@@ -270,7 +270,7 @@ const schemes = [
       "Ensures food security for economically weaker sections.",
       "Supports vulnerable populations during crises."
     ],
-    link: "https://www.pmgkay.in/"
+    link: "https://www.myscheme.gov.in/schemes/pm-gkay"
   },
   {
     title: "Beti Bachao Beti Padhao",
@@ -287,7 +287,7 @@ const schemes = [
       "Financial incentives for girl child development.",
       "Awareness campaigns against gender discrimination."
     ],
-    link: "https://wcd.nic.in/bbbp-schemes"
+    link: "https://www.myscheme.gov.in/schemes/bbbp"
   },
   {
     title: "PM Fasal Bima Yojana",
@@ -339,24 +339,9 @@ const schemes = [
       "Improves waste management infrastructure.",
       "Reduces open defecation and promotes hygiene."
     ],
-    link: "https://swachhbharat.mygov.in/"
+    link: "https://swachhbharatmission.ddws.gov.in/"
   },
-  {
-    title: "National Rural Health Mission",
-    category: "Healthcare",
-    t1:"Eligibility :",
-    eligibility: [
-      "Rural populations, especially women and children.",
-      "Priority given to economically weaker sections."
-    ],
-    t2:"Benefits :",
-    benefits: [
-      "Provides free or subsidized healthcare in rural areas.",
-      "Improves maternal and child health services.",
-      "Expands availability of essential medicines and facilities."
-    ],
-    link: "https://nhm.gov.in/"
-  },
+ 
   {
     title: "PM Kaushal Vikas Yojana",
     category: "Education",
@@ -371,7 +356,7 @@ const schemes = [
       "Certification and job placement assistance.",
       "Boosts self-employment and entrepreneurship."
     ],
-    link: "https://pmkvyofficial.org/"
+    link: "https://en.wikipedia.org/wiki/Pradhan_Mantri_Kaushal_Vikas_Yojana"
   },
   {
     title: "Make in India",
@@ -407,10 +392,10 @@ const schemes = [
       " 2)On death of the beneficiary, spouse is eligible for 50% monthly pension.",
       " 3)If husband and wife, both joins the scheme, they are eligible for Rs. 6000/- monthly pension jointly."
     ],
-    link: "https://example.gov.in/pmsym"
+    link: "https://maandhan.in/"
   },
-  [
-    {
+
+ {
       "title": "PM-Kisan Credit Card",
       "t1": "Eligibility :",
       "eligibility": [
@@ -426,8 +411,8 @@ const schemes = [
       ],
       "category": "Agriculture",
       "link": "https://pmkisan.gov.in"
-    },
-    {
+  },
+  {
       "title": "National Rural Livelihood Mission",
       "t1": "Eligibility :",
       "eligibility": [
@@ -443,8 +428,8 @@ const schemes = [
       ],
       "category": "Rural Development",
       "link": "https://aajeevika.gov.in"
-    },
-    {
+  },
+  {
       "title": "Pradhan Mantri Fasal Bima Yojana",
       "t1": "Eligibility :",
       "eligibility": [
@@ -460,8 +445,8 @@ const schemes = [
       ],
       "category": "Agriculture",
       "link": "https://pmfby.gov.in"
-    },
-    {
+  },
+  {
       "title": "Vidya Lakshmi Portal",
       "t1": "Eligibility :",
       "eligibility": [
@@ -477,8 +462,8 @@ const schemes = [
       ],
       "category": "Education",
       "link": "https://www.vidyalakshmi.co.in"
-    },
-    {
+  },
+  {
       "title": "Rashtriya Swasthya Bima Yojana",
       "t1": "Eligibility :",
       "eligibility": [
@@ -493,9 +478,9 @@ const schemes = [
         "3) Transportation allowance."
       ],
       "category": "Healthcare",
-      "link": "https://www.nhp.gov.in/rashtriya-swasthya-bima-yojana_pg"
-    },
-    {
+      "link": "https://www.india.gov.in/spotlight/rashtriya-swasthya-bima-yojana"
+  },
+  {
       "title": "Solar Subsidies Scheme",
       "t1": "Eligibility :",
       "eligibility": [
@@ -511,8 +496,8 @@ const schemes = [
       ],
       "category": "Energy",
       "link": "https://mnre.gov.in"
-    },
-    {
+  },
+  {
       "title": "Pradhan Mantri Suraksha Bima Yojana",
       "t1": "Eligibility :",
       "eligibility": [
@@ -527,9 +512,9 @@ const schemes = [
         "3) Simple enrollment process through banks."
       ],
       "category": "Insurance",
-      "link": "https://financialservices.gov.in/insurance-divisions/Government-Sponsored-Socially-Oriented-Insurance-Schemes/Pradhan-Mantri-Suraksha-Bima-Yojana(PMSBY)"
-    },
-    {
+      "link": "https://financialservices.gov.in/beta/en/pmsby"
+  },
+  {
       "title": "Pradhan Mantri Vaya Vandana Yojana",
       "t1": "Eligibility :",
       "eligibility": [
@@ -544,9 +529,9 @@ const schemes = [
         "3) Loan facility available during the policy term."
       ],
       "category": "Social Security",
-      "link": "https://financialservices.gov.in/insurance-divisions/Government-Sponsored-Socially-Oriented-Insurance-Schemes/Pradhan-Mantri-Vaya-Vandana-Yojana(PMVVY)"
-    },
-    {
+      "link": "https://web.umang.gov.in/landing/department/pmvvy.html"
+  },
+  {
       "title": "Rashtriya Krishi Vikas Yojana",
       "t1": "Eligibility :",
       "eligibility": [
@@ -562,8 +547,8 @@ const schemes = [
       ],
       "category": "Agriculture",
       "link": "https://rkvy.nic.in"
-    },
-    {
+  },
+  {
       "title": "Pradhan Mantri Matru Vandana Yojana",
       "t1": "Eligibility :",
       "eligibility": [
@@ -578,9 +563,9 @@ const schemes = [
         "3) Improved access to healthcare and nutrition."
       ],
       "category": "Healthcare",
-      "link": "https://wcd.nic.in/schemes/pradhan-mantri-matru-vandana-yojana"
-    },
-    {
+      "link": "https://wcd.delhi.gov.in/wcd/pradhan-mantri-matru-vandana-yojana-pmmvy"
+  },
+  {
       "title": "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
       "t1": "Eligibility :",
       "eligibility": [
@@ -595,9 +580,9 @@ const schemes = [
         "3) Post-placement support and tracking."
       ],
       "category": "Skill Development",
-      "link": "https://ddugky.gov.in"
-    },
-    {
+      "link": "https://en.wikipedia.org/wiki/Deen_Dayal_Upadhyaya_Grameen_Kaushalya_Yojana"
+  },
+  {
       "title": "Pradhan Mantri Kaushal Vikas Yojana",
       "t1": "Eligibility :",
       "eligibility": [
@@ -612,9 +597,9 @@ const schemes = [
         "3) Monetary reward on successful completion and certification."
       ],
       "category": "Skill Development",
-      "link": "https://pmkvyofficial.org"
-    },
-    {
+      "link": "https://en.wikipedia.org/wiki/Pradhan_Mantri_Kaushal_Vikas_Yojana"
+  },
+  {
       "title": "Anganwadi Services Scheme",
       "t1": "Eligibility :",
       "eligibility": [
@@ -629,9 +614,9 @@ const schemes = [
         "3) Pre-school education for children aged 3-6 years."
       ],
       "category": "Child Development",
-      "link": "https://wcd.nic.in/schemes/anganwadi-services-scheme"
-    },
-    {
+      "link": "https://www.shankariasparliament.com/current-affairs/anganwadi-services"
+  },
+  {
       "title": "Beti Bachao Beti Padhao",
       "t1": "Eligibility :",
       "eligibility": [
@@ -646,9 +631,9 @@ const schemes = [
         "3) Awareness campaigns on gender equality."
       ],
       "category": "Gender Equality",
-      "link": "https://wcd.nic.in/bbbp-schemes"
-    },
-    {
+      "link": "https://www.myscheme.gov.in/schemes/bbbp"
+  },
+  {
       "title": "National Food Security Mission",
       "t1": "Eligibility :",
       "eligibility": [
@@ -664,8 +649,8 @@ const schemes = [
       ],
       "category": "Agriculture",
       "link": "https://nfsm.gov.in"
-    },
-    {
+  },
+  {
       "title": "Credit Linked Capital Subsidy Scheme",
       "t1": "Eligibility :",
       "eligibility": [
@@ -681,8 +666,8 @@ const schemes = [
       ],
       "category": "Industry",
       "link": "https://msme.gov.in/schemes/technology-upgradation-and-quality-certification/credit-linked-capital-subsidy-technology"
-    },
-    {
+  },
+  {
       "title": "Mid-Day Meal Scheme",
       "t1": "Eligibility :",
       "eligibility": [
@@ -697,9 +682,9 @@ const schemes = [
         "3) Improved nutrition levels among children."
       ],
       "category": "Education",
-      "link": "https://mdm.nic.in"
-    },
-    {
+      "link": "https://en.wikipedia.org/wiki/Midday_Meal_Scheme"
+  },
+  {
       "title": "Integrated Child Development Services",
       "t1": "Eligibility :",
       "eligibility": [
@@ -714,9 +699,9 @@ const schemes = [
         "3) Referral services and pre-school education."
       ],
       "category": "Child Development",
-      "link": "https://icds-wcd.nic.in"
-    },
-    {
+      "link": "https://wcd.delhi.gov.in/wcd/introduction-integrated-child-development-services#:~:text=Integrated%20Child%20Development%20Services%20(ICDS,impressive%20progress%20in%20many%20spheres."
+  },
+  {
       "title": "National Rural Health Mission",
       "t1": "Eligibility :",
       "eligibility": [
@@ -731,9 +716,9 @@ const schemes = [
         "3) Community participation in healthcare planning."
       ],
       "category": "Healthcare",
-      "link": "https://nhm.gov.in"
-    },
-    {
+      "link": "https://nihfw.ac.in/cms/national-rural-health-mission.php"
+  },
+  {
       "title": "Digital India Land Records Modernization Programme",
       "t1": "Eligibility :",
       "eligibility": [
@@ -749,9 +734,9 @@ const schemes = [
       ],
       "category": "Land Governance",
       "link": "https://dolr.gov.in/dilrmp"
-    }
+  }
   ]
-  ];
+ 
   // ... other schemes ...
 
 function renderSchemes(filteredSchemes) {
