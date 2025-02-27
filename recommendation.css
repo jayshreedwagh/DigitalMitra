@@ -108,7 +108,7 @@ input:checked + .slider:before {
 
 /* Hidden Class */
 .hidden {
-    display: none;
+    display: none !important;
 }
 /* Center the toggle switch and text */
 .toggle-container {
