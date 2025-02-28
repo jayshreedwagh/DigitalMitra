@@ -1,0 +1,22 @@
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    gap: 15px; /* Increased spacing */
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-right: 10px;
+    padding-right: 10px; /* Added space before the line */
+}
+
+.nav-links li:not(:last-child)::after {
+    content: "";
+    width: 2px;
+    height: 25px; /* Made the line longer */
+    background-color: white; /* Adjust color as needed */
+    position: absolute;
+    right: -10px; /* Added more space before the line */
+}
