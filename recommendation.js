@@ -6,12 +6,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log("📌 Document loaded.");
 
     // UI Elements
-    const schemeToggle = document.getElementById("schemeToggle");
     const recommendedSchemes = document.getElementById("recommendedSchemes");
-    const appliedSchemes = document.getElementById("appliedSchemes");
-    const toggleText = document.getElementById("toggleText");
-    const searchBar = document.getElementById("searchBar");
-    const categoryFilter = document.getElementById("categoryFilter");
 
     let userData = {};
 
@@ -50,9 +45,9 @@ document.addEventListener("DOMContentLoaded", async function () {
             let userIncome = parseInt(userData.Income) || 0;
             let matchedCriteria = 0;
             let totalCriteria = 0;
-            let isEligible = true;
+            let isEligible = true; // Track if user is eligible
 
-            // Mandatory Eligibility Check (Skip schemes if failed)
+            // Mandatory Eligibility Check
             if (schemeData.Age_Min !== undefined && schemeData.Age_Max !== undefined) {
                 totalCriteria++;
                 if (userAge >= schemeData.Age_Min && userAge <= schemeData.Age_Max) {
@@ -60,10 +55,19 @@ document.addEventListener("DOMContentLoaded", async function () {
                     console.log(`✔ Age match: ${userAge} in range ${schemeData.Age_Min}-${schemeData.Age_Max}`);
                 } else {
                     console.log(`❌ Age mismatch: ${userAge} NOT in range ${schemeData.Age_Min}-${schemeData.Age_Max}`);
-                    return; // Skip scheme
+                    isEligible = false; // Mark as ineligible but continue checking
                 }
             }
-
+            if (schemeData.Marital_Status !== undefined) {
+                totalCriteria++;
+                if (schemeData.Marital_Status.toLowerCase() === "na" || userData.Marital.toLowerCase() === schemeData.Marital_Status.toLowerCase()) {
+                    matchedCriteria++;
+                    console.log(`✔ Marital Status match: User is ${userData.Marital}`);
+                } else {
+                    console.log(`❌ Marital Status mismatch. Required: ${schemeData.Marital_Status}, User: ${userData.Marital}`);
+                    isEligible = false;
+                }
+            }
             if (schemeData.Annual_Income !== undefined) {
                 totalCriteria++;
                 if (userIncome >= schemeData.Annual_Income) {
@@ -71,24 +75,35 @@ document.addEventListener("DOMContentLoaded", async function () {
                     console.log(`✔ Income match: ${userIncome} >= ${schemeData.Annual_Income}`);
                 } else {
                     console.log(`❌ Income mismatch: ${userIncome} < ${schemeData.Annual_Income}`);
-                    return; // Skip scheme
+                    isEligible = false;
                 }
             }
 
-            if (schemeData.Citizen && userData.citizenship) {
+            // Additional Checks (Will not skip, but affect match percentage)
+            if (schemeData.Citizen && userData.citizen) {
                 totalCriteria++;
-                if (userData.citizenship.toLowerCase() === schemeData.Citizen.toLowerCase()) {
-                    matchedCriteria++;
-                    console.log(`✔ Citizenship match: User is ${userData.citizenship}`);
-                } else {
-                    console.log(`❌ Citizenship mismatch. Required: ${schemeData.Citizen}, User: ${userData.citizenship}`);
-                    return; // Skip scheme
-                }
+                if (userData.citizen.toLowerCase() === schemeData.Citizen.toLowerCase()) matchedCriteria++;
+            }
+            if (schemeData.Employement_status && userData.Employment_Status) {
+                totalCriteria++;
+                if (schemeData.Employement_status.toLowerCase() === "na" || userData.Employment_Status.toLowerCase() === schemeData.Employement_status.toLowerCase()) matchedCriteria++;
+            }
+            if (schemeData.Occupation && userData.Occupation) {
+                totalCriteria++;
+                if (schemeData.Occupation.toLowerCase() === "na" || userData.Occupation.toLowerCase() === schemeData.Occupation.toLowerCase()) matchedCriteria++;
+            }
+            if (schemeData.Gender !== undefined) {
+                totalCriteria++;
+                if (schemeData.Gender.toLowerCase() === "na" || userData.gender.toLowerCase() === schemeData.Gender.toLowerCase()) matchedCriteria++;
             }
 
             // Calculate match percentage
             schemeData.matchPercentage = totalCriteria > 0 ? ((matchedCriteria / totalCriteria) * 100).toFixed(2) : 0;
-            schemes.push(schemeData);
+
+            // Only include schemes with match percentage >= 50%
+            if (schemeData.matchPercentage >= 50 && isEligible) {
+                schemes.push(schemeData);
+            }
         });
 
         // Sort schemes by match percentage (Descending)
@@ -107,7 +122,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <p>📝 Description: ${scheme.description || "N/A"}</p>
                     <p>🏩 Issued by: ${scheme.issuer || "N/A"}</p>
                     <p>✅ Match Percentage: <strong>${scheme.matchPercentage}%</strong></p>
-                    <button data-id="${scheme.id}">More Details</button>
+                    <a href="${scheme.link}" target="_blank"><button>Apply Now</button></a>
                 </div>
             `).join('')
             : `<p class="no-match">⚠️ No matching schemes found.</p>`;
@@ -123,32 +138,5 @@ document.addEventListener("DOMContentLoaded", async function () {
         } else {
             console.warn("⚠️ No authenticated user.");
         }
-    });
-
-    // Toggle Recommended & Applied Schemes
-    schemeToggle.addEventListener("change", function () {
-        console.log("🔄 Toggle changed. Checked:", schemeToggle.checked);
-        recommendedSchemes.style.display = schemeToggle.checked ? "none" : "block";
-        appliedSchemes.style.display = schemeToggle.checked ? "block" : "none";
-        toggleText.textContent = schemeToggle.checked ? "Applied Schemes" : "Recommended Schemes";
-        console.log("📌 Current view:", toggleText.textContent);
-    });
-
-    // Search Functionality
-    searchBar.addEventListener("input", function () {
-        const searchText = searchBar.value.toLowerCase();
-        console.log("🔍 Search query:", searchText);
-        document.querySelectorAll(".scheme-card").forEach(card => {
-            card.style.display = card.innerText.toLowerCase().includes(searchText) ? "block" : "none";
-        });
-    });
-
-    // Category Filtering
-    categoryFilter.addEventListener("change", function () {
-        const selectedCategory = categoryFilter.value;
-        console.log("📌 Selected category:", selectedCategory);
-        document.querySelectorAll(".scheme-card").forEach(card => {
-            card.style.display = (selectedCategory === "all" || card.dataset.category === selectedCategory) ? "block" : "none";
-        });
     });
 });
