@@ -1,499 +1,143 @@
-// DigitalMitra Chatbot Implementation
+// DigitalMitra Chatbot - Fully Interactive with Menu-Based Navigation & UI
 
-// Configuration object for the chatbot
 const digitalMitraConfig = {
   botName: "DigitalMitra",
   languages: ["english", "marathi"],
   defaultLanguage: "english",
   
-  // Knowledge base for website FAQ answers
   knowledgeBase: {
     english: {
-      "how to use this website": "You can navigate through our website using the menu at the top. Browse our products/services by clicking on respective categories.",
-      "contact information": "You can reach us at support@digitalmitra.com or call us at +91-9067460129 during business hours.",
-      "business hours": "We are available Monday to Friday, 9 AM to 6 PM IST.",
-      "about us": "We are a digital solutions provider committed to helping businesses grow online.",
-      "services": "We offer web development, app development, digital marketing, and e-commerce solutions."
-      // Add more Q&A pairs as needed
-    },
-    marathi: {
-      "या वेबसाइटचा वापर कसा करावा": "आपण वरील मेनू वापरून आमच्या वेबसाइटवर नेव्हिगेट करू शकता. संबंधित श्रेणींवर क्लिक करून आमचे उत्पादने/सेवा ब्राउझ करा.",
-      "संपर्क माहिती": "आपण आम्हाला contact@yourwebsite.com वर किंवा व्यवसायाच्या वेळेत +91-XXXXXXXXXX वर कॉल करून संपर्क साधू शकता.",
-      "व्यावसायिक तास": "आम्ही सोमवार ते शुक्रवार, सकाळी 9 ते संध्याकाळी 6 IST पर्यंत उपलब्ध आहोत.",
-      "आमच्याबद्दल": "आम्ही डिजिटल सोल्युशन्स प्रदाता आहोत जे व्यवसायांना ऑनलाइन वाढवण्यास मदत करण्यास वचनबद्ध आहेत.",
-      "सेवा": "आम्ही वेब डेव्हलपमेंट, अॅप डेव्हलपमेंट, डिजिटल मार्केटिंग आणि ई-कॉमर्स सोल्युशन्स ऑफर करतो."
-      // Add more Q&A pairs as needed
+      "how to use this website": `Before proceeding, please register if you haven't. If you are already registered, please login.<br><br>
+      <div style='padding: 15px; background: #ffffff; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);'>
+        <h3 style='color: #007bff; text-align: center;'>📌 Our Website Sections</h3>
+        <ul style='list-style-type: none; padding-left: 0; font-size: 16px; color: #333; font-weight: bold;'>
+          <li style='padding: 10px; border-bottom: 1px solid #ddd; display: flex; align-items: center;'>🏠 <span style='margin-left: 10px;'>Home: <span style='font-weight: normal;'>Navigate to the main page.</span></span></li>
+          <li style='padding: 10px; border-bottom: 1px solid #ddd; display: flex; align-items: center;'>📖 <span style='margin-left: 10px;'>About Us: <span style='font-weight: normal;'>We help you discover government schemes based on your profile, ensuring you receive the benefits you qualify for.</span></span></li>
+          <li style='padding: 10px; border-bottom: 1px solid #ddd; display: flex; align-items: center;'>⚙ <span style='margin-left: 10px;'>Services: <span style='font-weight: normal;'>We track all government schemes and analyze your data to suggest those that match your eligibility.</span></span></li>
+          <li style='padding: 10px; border-bottom: 1px solid #ddd; display: flex; align-items: center;'>📞 <span style='margin-left: 10px;'>Contact Us: <span style='font-weight: normal;'>Get in touch with our support team.</span></span></li>
+          <li style='padding: 10px; border-bottom: 1px solid #ddd; display: flex; align-items: center;'>📜 <span style='margin-left: 10px;'>Schemes: <span style='font-weight: normal;'>Browse various schemes available for users.</span></span></li>
+          <li style='padding: 10px; display: flex; align-items: center;'>🔍 <span style='margin-left: 10px;'>Your Schemes: <span style='font-weight: normal;'>View personalized schemes based on your profile.</span></span></li>
+        </ul>
+      </div>`,
+      "contact information": "Reach us at <strong>support@digitalmitra.com</strong> or call <strong>+91-9067460129</strong> (Mon-Fri, 9 AM - 6 PM IST).",
+      "business hours": "We are available <strong>Monday to Friday, 9 AM - 6 PM IST</strong>.",
+      "about us": "<strong>We are here to help you find all government schemes</strong> that match your eligibility criteria based on your profile. Our platform ensures that you get access to the most relevant benefits, making it easier for you to navigate and apply for the right schemes without hassle.",
+      "services": "We keep track of all government schemes and your data to help you determine which schemes fit your eligibility criteria. Our platform ensures that you receive accurate and timely recommendations based on your profile.",
+      "profile queries": `<strong>Profile Information:</strong>
+        <ul style='text-align: left;'>
+          <li>👤 Name & Age</li>
+          <li>📍 Location</li>
+          <li>📚 Education Qualification</li>
+          <li>💼 Employment Status</li>
+          <li>🏠 Income Details</li>
+        </ul>
+        <strong>Why Complete Your Profile?</strong>
+        <ul style='text-align: left;'>
+          <li>✅ Get personalized scheme recommendations</li>
+          <li>✅ Access government benefits relevant to you</li>
+          <li>✅ Save time by filtering out ineligible schemes</li>
+        </ul>
+        Complete your profile today to unlock all benefits!`,
+      "reset password": "Click <strong>'Forgot Password'</strong> on the login page and follow the instructions to reset your password."
     }
   },
-  
-  // Function to handle user queries
-  handleQuery: function(query, language) {
-    // Default to English if language not specified
-    const currentLanguage = this.languages.includes(language) ? language : this.defaultLanguage;
+
+  getMenuOptions: function() {
+    const options = [
+      "1. How to use this website",
+      "2. Contact information",
+      "3. Business hours",
+      "4. About us",
+      "5. Services",
+      "6. Profile Queries",
+      "7. Reset password"
+    ];
+    return "<h3 style='text-align: center; color: #fff;'>Please select a topic by entering the number:</h3><ul style='text-align:left; font-size:16px; color:#fff; padding: 0; list-style-type: none;'><li style='padding: 8px; border-bottom: 1px solid #ddd;'>" + options.join('</li><li style="padding: 8px; border-bottom: 1px solid #ddd;">') + "</li></ul>";
+  },
+
+  getResponse: function(optionNumber) {
+    const responseKeys = [
+      "how to use this website",
+      "contact information",
+      "business hours",
+      "about us",
+      "services",
+      "profile queries",
+      "reset password"
+    ];
     
-    // Convert query to lowercase for case-insensitive matching
-    const normalizedQuery = query.toLowerCase();
-    
-    // Check if we have an exact match in our knowledge base
-    if (this.knowledgeBase[currentLanguage][normalizedQuery]) {
-      return this.knowledgeBase[currentLanguage][normalizedQuery];
+    if (optionNumber >= 1 && optionNumber <= responseKeys.length) {
+      return this.knowledgeBase.english[responseKeys[optionNumber - 1]];
     }
-    
-    // If no exact match, check for partial matches
-    for (const key in this.knowledgeBase[currentLanguage]) {
-      if (normalizedQuery.includes(key) || key.includes(normalizedQuery)) {
-        return this.knowledgeBase[currentLanguage][key];
-      }
-    }
-    
-    // If no matches found, return default message
-    return currentLanguage === "english" 
-      ? "I'm sorry, I don't have information about that. Please try asking in a different way or contact our support team."
-      : "माफ करा, मला याबद्दल माहिती नाही. कृपया वेगळ्या प्रकारे विचारण्याचा प्रयत्न करा किंवा आमच्या सपोर्ट टीमशी संपर्क साधा.";
+    return "Invalid selection. Please choose a valid option from the menu.";
   }
 };
 
-// Function to add the chatbot UI to your website
-function initializeDigitalMitra() {
-  // Create chatbot toggle button
+
+
+// UI Setup
+function initializeDigitalMitraUI() {
   const chatToggle = document.createElement('div');
   chatToggle.className = 'chat-toggle';
   chatToggle.innerHTML = '💬';
   document.body.appendChild(chatToggle);
-  
-  // Create chatbot container
+
   const chatbotContainer = document.createElement('div');
   chatbotContainer.className = 'digitalmitra-container hidden';
   chatbotContainer.innerHTML = `
-    <div class="chat-header">
-      <h3>DigitalMitra</h3>
-      <div class="language-selector">
-        <button class="lang-btn active" data-lang="english">English</button>
-        <button class="lang-btn" data-lang="marathi">मराठी</button>
-      </div>
-    </div>
+    <div class="chat-header">DigitalMitra <button class="close-chat">×</button></div>
     <div class="chat-messages"></div>
     <div class="chat-input">
-      <input type="text" placeholder="Ask me anything..." id="user-input">
+      <input type="text" id="user-input" placeholder="Type a number from the menu...">
       <button id="send-btn">Send</button>
-    </div>
-  `;
-  
+    </div>`;
   document.body.appendChild(chatbotContainer);
-  
-  // Toggle chat visibility when clicking on the chat toggle button
-  chatToggle.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevent event from bubbling to document
+
+  const chatMessages = chatbotContainer.querySelector('.chat-messages');
+  const userInput = chatbotContainer.querySelector('#user-input');
+  const sendButton = chatbotContainer.querySelector('#send-btn');
+  const closeChatButton = chatbotContainer.querySelector('.close-chat');
+
+  chatToggle.addEventListener('click', () => {
     chatbotContainer.classList.toggle('hidden');
-    chatToggle.style.display = chatbotContainer.classList.contains('hidden') ? 'flex' : 'none';
-    
-    // If opening the chat for the first time, show welcome message
     if (!chatbotContainer.classList.contains('hidden')) {
-      const chatMessages = document.querySelector('.chat-messages');
-      
-      // Load saved chat from sessionStorage if available
-      const savedChat = sessionStorage.getItem('digitalMitraChat');
-      const savedLanguage = sessionStorage.getItem('digitalMitraLanguage');
-      const savedLoginState = sessionStorage.getItem('digitalMitraLoginState');
-      const savedLoginAsked = sessionStorage.getItem('digitalMitraLoginAsked');
-      const savedProfileAsked = sessionStorage.getItem('digitalMitraProfileAsked');
-      
-      if (savedChat && chatMessages.innerHTML === '') {
-        chatMessages.innerHTML = savedChat;
-        
-        // Restore language state
-        if (savedLanguage) {
-          currentLanguage = savedLanguage;
-          document.querySelectorAll('.lang-btn').forEach(btn => {
-            if (btn.getAttribute('data-lang') === savedLanguage) {
-              btn.classList.add('active');
-            } else {
-              btn.classList.remove('active');
-            }
-          });
-        }
-        
-        // Restore conversation state variables
-        if (savedLoginState) {
-          isLoggedIn = savedLoginState === 'true' ? true : 
-                       savedLoginState === 'false' ? false : null;
-        }
-        
-        if (savedLoginAsked) {
-          isLoginAsked = savedLoginAsked === 'true';
-        }
-        
-        if (savedProfileAsked) {
-          isProfileQuestionAsked = savedProfileAsked === 'true';
-        }
-        
-        // Update input placeholder based on language
-        const inputPlaceholder = currentLanguage === 'english' ? 
-          "Ask me anything..." : "मला काहीही विचारा...";
-        document.getElementById('user-input').placeholder = inputPlaceholder;
-      } 
-      else if (chatMessages.children.length === 0) {
-        showWelcomeMessage();
-      }
-      chatbotContainer.setAttribute('data-initialized', 'true');
+      setTimeout(() => {
+        addMessageToChat('bot', "Hello! I'm DigitalMitra. Welcome to our website!");
+        setTimeout(() => addMessageToChat('bot', digitalMitraConfig.getMenuOptions()), 500);
+      }, 300);
     }
   });
-  
-  // Hide chat when clicking outside the chatbot
-  document.addEventListener('click', (e) => {
-    // Check if the click is outside the chatbot container and the chat is visible
-    if (!chatbotContainer.classList.contains('hidden') && 
-        !chatbotContainer.contains(e.target) && 
-        e.target !== chatToggle) {
-      chatbotContainer.classList.add('hidden');
-      chatToggle.style.display = 'flex';
-    }
+
+  closeChatButton.addEventListener('click', () => {
+    chatbotContainer.classList.add('hidden');
   });
-  
-  // Prevent chat from closing when clicking inside the chatbot
-  chatbotContainer.addEventListener('click', (e) => {
-    e.stopPropagation(); // Stop click event from bubbling up to document
-  });
-  
-  // Set up event listeners
-  let currentLanguage = digitalMitraConfig.defaultLanguage;
-  let isLoginAsked = false;
-  let isLoggedIn = null;
-  let isProfileQuestionAsked = false;
-  
-  // Check for saved state in sessionStorage
-  const savedLanguage = sessionStorage.getItem('digitalMitraLanguage');
-  if (savedLanguage && digitalMitraConfig.languages.includes(savedLanguage)) {
-    currentLanguage = savedLanguage;
-  }
-  
-  const savedLoginAsked = sessionStorage.getItem('digitalMitraLoginAsked');
-  if (savedLoginAsked) {
-    isLoginAsked = savedLoginAsked === 'true';
-  }
-  
-  const savedLoginState = sessionStorage.getItem('digitalMitraLoginState');
-  if (savedLoginState) {
-    isLoggedIn = savedLoginState === 'true' ? true : 
-                 savedLoginState === 'false' ? false : null;
-  }
-  
-  const savedProfileAsked = sessionStorage.getItem('digitalMitraProfileAsked');
-  if (savedProfileAsked) {
-    isProfileQuestionAsked = savedProfileAsked === 'true';
-  }
-  
-  // Language toggle functionality
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    // Set initial active state based on saved language
-    if (btn.getAttribute('data-lang') === currentLanguage) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
-    
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentLanguage = btn.getAttribute('data-lang');
-      
-      // Save language selection to sessionStorage
-      sessionStorage.setItem('digitalMitraLanguage', currentLanguage);
-      
-      // Update placeholder text based on language
-      const inputPlaceholder = currentLanguage === 'english' ? 
-        "Ask me anything..." : "मला काहीही विचारा...";
-      document.getElementById('user-input').placeholder = inputPlaceholder;
-      
-      // Reset login status when language changes
-      isLoginAsked = false;
-      isLoggedIn = null;
-      isProfileQuestionAsked = false;
-      
-      // Update the session storage
-      sessionStorage.setItem('digitalMitraLoginAsked', 'false');
-      sessionStorage.setItem('digitalMitraLoginState', '');
-      sessionStorage.setItem('digitalMitraProfileAsked', 'false');
-      
-      // Show welcome message in new language
-      showWelcomeMessage();
-    });
-  });
-  
-  // Message sending functionality
-  const sendButton = document.getElementById('send-btn');
-  const userInput = document.getElementById('user-input');
-  
-  sendButton.addEventListener('click', () => {
-    sendMessage();
-  });
-  
-  userInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      sendMessage();
-    }
-  });
-  
+
   function sendMessage() {
     const query = userInput.value.trim();
     if (!query) return;
-    
-    // Add user message to chat
+
     addMessageToChat('user', query);
-    
-    // Check if we need to handle login question
-    if (isLoginAsked && isLoggedIn === null) {
-      handleLoginResponse(query);
-    } else if (isProfileQuestionAsked) {
-      handleProfileResponse(query);
+    const selectedOption = parseInt(query);
+    if (!isNaN(selectedOption)) {
+      setTimeout(() => addMessageToChat('bot', digitalMitraConfig.getResponse(selectedOption)), 500);
     } else {
-      // Get bot response
-      const response = digitalMitraConfig.handleQuery(query, currentLanguage);
-      
-      // Add bot response to chat after a small delay to mimic thinking
-      setTimeout(() => {
-        addMessageToChat('bot', response);
-      }, 500);
+      setTimeout(() => addMessageToChat('bot', "Invalid input. Please type a number from the menu."), 500);
     }
-    
-    // Clear input
     userInput.value = '';
   }
-  
+
   function addMessageToChat(sender, message) {
-    const chatMessages = document.querySelector('.chat-messages');
     const messageElement = document.createElement('div');
     messageElement.className = `message ${sender}-message`;
-    messageElement.textContent = message;
+    messageElement.innerHTML = message;
     chatMessages.appendChild(messageElement);
-    
-    // Auto scroll to bottom
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    
-    // Save chat history to sessionStorage
-    sessionStorage.setItem('digitalMitraChat', chatMessages.innerHTML);
-    sessionStorage.setItem('digitalMitraLoginAsked', isLoginAsked.toString());
-    sessionStorage.setItem('digitalMitraProfileAsked', isProfileQuestionAsked.toString());
-    if (isLoggedIn !== null) {
-      sessionStorage.setItem('digitalMitraLoginState', isLoggedIn.toString());
-    }
   }
-  
-  function showWelcomeMessage() {
-    const chatMessages = document.querySelector('.chat-messages');
-    // Clear existing messages
-    chatMessages.innerHTML = '';
-    
-    // Add welcome message
-    const welcomeMessage = currentLanguage === 'english' 
-      ? "Hello! I'm DigitalMitra. Welcome to our website!"
-      : "नमस्कार! मी डिजिटलमित्र आहे. आमच्या वेबसाइटवर आपले स्वागत आहे!";
-    
-    setTimeout(() => {
-      addMessageToChat('bot', welcomeMessage);
-      
-      // Ask about login after a short delay
-      setTimeout(() => {
-        const loginQuestion = currentLanguage === 'english' 
-          ? "Did you login to your account? (Please respond with 'yes' or 'no')"
-          : "आपण आपल्या खात्यात लॉगिन केले आहे का? (कृपया 'हो' किंवा 'नाही' सह प्रतिसाद द्या)";
-        
-        addMessageToChat('bot', loginQuestion);
-        isLoginAsked = true;
-        sessionStorage.setItem('digitalMitraLoginAsked', 'true');
-      }, 800);
-    }, 300);
-  }
-  
-  function handleLoginResponse(response) {
-    const normalizedResponse = response.toLowerCase();
-    
-    // Check for yes/no in both languages
-    if (normalizedResponse === 'yes' || normalizedResponse === 'y' || 
-        normalizedResponse === 'हो' || normalizedResponse === 'होय') {
-      isLoggedIn = true;
-      sessionStorage.setItem('digitalMitraLoginState', 'true');
-      
-      // Provide response for logged in users and ask about profile completion
-      const loggedInMessage = currentLanguage === 'english' 
-        ? "Great! Did you complete your profile? (Please respond with 'yes' or 'no')"
-        : "छान! तुम्ही तुमची प्रोफाइल पूर्ण केली आहे का? (कृपया 'हो' किंवा 'नाही' सह प्रतिसाद द्या)";
-      
-      setTimeout(() => {
-        addMessageToChat('bot', loggedInMessage);
-        isProfileQuestionAsked = true;
-        sessionStorage.setItem('digitalMitraProfileAsked', 'true');
-      }, 500);
-    } 
-    else if (normalizedResponse === 'no' || normalizedResponse === 'n' || 
-             normalizedResponse === 'नाही') {
-      isLoggedIn = false;
-      sessionStorage.setItem('digitalMitraLoginState', 'false');
-      
-      // Provide response for non-logged in users
-      const notLoggedInMessage = currentLanguage === 'english' 
-        ? "Sorry, you need to login first before proceeding. Please login to our website. Let me know when you're done by responding with 'yes'."
-        : "क्षमस्व, पुढे जाण्यापूर्वी आपल्याला प्रथम लॉगिन करणे आवश्यक आहे. कृपया आमच्या वेबसाइटवर लॉगिन करा. जेव्हा आपण पूर्ण केले असेल तेव्हा मला 'हो' म्हणून प्रतिसाद द्या.";
-      
-      setTimeout(() => {
-        addMessageToChat('bot', notLoggedInMessage);
-        
-        // Set login as asked to false since we're asking a different question now
-        isLoginAsked = false;
-        isProfileQuestionAsked = true; // Treat the next response as a profile response
-        sessionStorage.setItem('digitalMitraLoginAsked', 'false');
-        sessionStorage.setItem('digitalMitraProfileAsked', 'true');
-      }, 500);
-    } 
-    else {
-      // Handle invalid response
-      const invalidResponseMessage = currentLanguage === 'english' 
-        ? "I didn't understand that. Please reply with 'yes' or 'no'."
-        : "मला ते समजले नाही. कृपया 'हो' किंवा 'नाही' सह उत्तर द्या.";
-      
-      setTimeout(() => {
-        addMessageToChat('bot', invalidResponseMessage);
-      }, 500);
-      
-      // Keep isLoggedIn as null to ask again
-      isLoggedIn = null;
-      sessionStorage.setItem('digitalMitraLoginState', '');
-    }
-  }
-  
-  function handleProfileResponse(response) {
-    const normalizedResponse = response.toLowerCase();
-    
-    // If the user was not logged in and now says they've logged in
-    if (isLoggedIn === false && (normalizedResponse === 'yes' || normalizedResponse === 'y' || 
-        normalizedResponse === 'हो' || normalizedResponse === 'होय')) {
-      
-      // They've now logged in, update state
-      isLoggedIn = true;
-      sessionStorage.setItem('digitalMitraLoginState', 'true');
-      
-      // Now ask about profile completion
-      const profileQuestion = currentLanguage === 'english' 
-        ? "Great! Now that you're logged in, did you complete your profile? (Please respond with 'yes' or 'no')"
-        : "छान! आता तुम्ही लॉग इन केले आहे, तुम्ही तुमची प्रोफाइल पूर्ण केली आहे का? (कृपया 'हो' किंवा 'नाही' सह प्रतिसाद द्या)";
-      
-      setTimeout(() => {
-        addMessageToChat('bot', profileQuestion);
-        // Keep isProfileQuestionAsked true
-        sessionStorage.setItem('digitalMitraProfileAsked', 'true');
-      }, 500);
-      
-      return; // Exit the function early
-    }
-    
-    // Regular profile response handling for logged in users
-    if (normalizedResponse === 'yes' || normalizedResponse === 'y' || 
-        normalizedResponse === 'हो' || normalizedResponse === 'होय') {
-      
-      // Response for users who completed profile
-      const profileCompletionMessage = currentLanguage === 'english' 
-        ? "Great! Now you can see all schemes applicable for you in my scheme!"
-        : "छान! आता तुम्ही माझ्या योजनेमध्ये तुमच्यासाठी लागू असलेल्या सर्व योजना पाहू शकता!";
-      
-      setTimeout(() => {
-        addMessageToChat('bot', profileCompletionMessage);
-        isProfileQuestionAsked = false; // Reset to handle regular queries
-        sessionStorage.setItem('digitalMitraProfileAsked', 'false');
-      }, 500);
-    } 
-    else if (normalizedResponse === 'no' || normalizedResponse === 'n' || 
-             normalizedResponse === 'नाही') {
-      
-      // Response for users who haven't completed profile
-      const notCompletedProfileMessage = currentLanguage === 'english' 
-        ? "No problem! You can view all features in our website! But to see applicable schemes for you, first complete your profile. Let me know when you've completed it by responding with 'yes'."
-        : "काही समस्या नाही! तुम्ही आमच्या वेबसाइटवरील सर्व वैशिष्ट्ये पाहू शकता! परंतु तुमच्यासाठी लागू असलेल्या योजना पाहण्यासाठी, प्रथम तुमची प्रोफाइल पूर्ण करा. जेव्हा आपण ते पूर्ण केले असेल तेव्हा मला 'हो' म्हणून सांगा.";
-      
-      setTimeout(() => {
-        addMessageToChat('bot', notCompletedProfileMessage);
-        // Keep isProfileQuestionAsked true to keep checking
-        sessionStorage.setItem('digitalMitraProfileAsked', 'true');
-      }, 500);
-    } 
-    else {
-      // Handle invalid response
-      const invalidResponseMessage = currentLanguage === 'english' 
-        ? "I didn't understand that. Please reply with 'yes' or 'no'."
-        : "मला ते समजले नाही. कृपया 'हो' किंवा 'नाही' सह उत्तर द्या.";
-      
-      setTimeout(() => {
-        addMessageToChat('bot', invalidResponseMessage);
-      }, 500);
-      
-      // Keep asking the profile question
-      isProfileQuestionAsked = true;
-      sessionStorage.setItem('digitalMitraProfileAsked', 'true');
-    }
-  }
+
+  sendButton.addEventListener('click', sendMessage);
+  userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
 }
 
-// Initialize when the DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  initializeDigitalMitra();
-});
-
-// Export functions for external use
-window.DigitalMitra = {
-  initialize: initializeDigitalMitra,
-  config: digitalMitraConfig,
-  
-  // Add a method to update the knowledge base
-  updateKnowledgeBase: function(language, key, value) {
-    if (digitalMitraConfig.languages.includes(language)) {
-      digitalMitraConfig.knowledgeBase[language][key] = value;
-      return true;
-    }
-    return false;
-  },
-  
-  // Add a method to add a new question and answer
-  addQnA: function(language, question, answer) {
-    if (digitalMitraConfig.languages.includes(language)) {
-      digitalMitraConfig.knowledgeBase[language][question.toLowerCase()] = answer;
-      return true;
-    }
-    return false;
-  },
-  
-  // Add method to manually show/hide chatbot
-  toggleChatbot: function(show) {
-    const chatbotContainer = document.querySelector('.digitalmitra-container');
-    const chatToggle = document.querySelector('.chat-toggle');
-    
-    if (!chatbotContainer) return false;
-    
-    if (show === true) {
-      chatbotContainer.classList.remove('hidden');
-      chatToggle.style.display = 'none';
-    } else if (show === false) {
-      chatbotContainer.classList.add('hidden');
-      chatToggle.style.display = 'flex';
-    } else {
-      chatbotContainer.classList.toggle('hidden');
-      chatToggle.style.display = chatbotContainer.classList.contains('hidden') ? 'flex' : 'none';
-    }
-    
-    return true;
-  },
-  
-  // Add method to clear chat history
-  clearChatHistory: function() {
-    sessionStorage.removeItem('digitalMitraChat');
-    sessionStorage.removeItem('digitalMitraLanguage');
-    sessionStorage.removeItem('digitalMitraLoginState');
-    sessionStorage.removeItem('digitalMitraLoginAsked');
-    sessionStorage.removeItem('digitalMitraProfileAsked');
-    
-    const chatMessages = document.querySelector('.chat-messages');
-    if (chatMessages) {
-      chatMessages.innerHTML = '';
-    }
-    
-    return true;
-  }
-};
+document.addEventListener('DOMContentLoaded', initializeDigitalMitraUI);
