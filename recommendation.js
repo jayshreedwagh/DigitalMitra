@@ -139,10 +139,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                         <span class="match-percentage">${scheme.matchPercentage}% Match</span>
                     </div>
                     <p class="scheme-description">${scheme.description || "No description available."}</p>
-                    <p class="scheme-issuer"><strong>🏛 Issuer:</strong> ${scheme.issuer || "N/A"}</p>
+                    
                     <div class="scheme-footer">
                         <a href="${scheme.link}" target="_blank">
-                            <button class="apply-btn">Apply Now</button>
+                            <button class="apply-btn">View details</button>
                         </a>
                     </div>
                 </div>
