@@ -272,3 +272,101 @@ input:checked + .slider:before {
         width: 90%;
     }
 }
+/* Container for the scheme cards */
+#recommendedSchemes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ensures 3 cards per row */
+    gap: 30px; /* More spacing between cards */
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Individual scheme card */
+.scheme-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 20px 20px 20px;
+    border-left: 5px solid #4CAF50;
+    transition: transform 0.3s ease-in-out;
+    max-width: 350px; /* Controls width */
+}
+
+.scheme-card:hover {
+    transform: scale(1.03);
+}
+
+/* Header section */
+.scheme-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Scheme title */
+.scheme-header h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+/* Match percentage badge */
+.match-percentage {
+    background: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Description text */
+.scheme-description {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 0;
+}
+
+/* Issuer details */
+.scheme-issuer {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Footer section */
+.scheme-footer {
+    text-align: right;
+    margin-top: 15px;
+}
+
+/* Apply button */
+.apply-btn {
+    background: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.apply-btn:hover {
+    background: #e65c00;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #recommendedSchemes {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusts for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    #recommendedSchemes {
+        grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); /* Single column on mobile */
+    }
+}

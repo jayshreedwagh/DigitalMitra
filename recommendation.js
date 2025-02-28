@@ -7,8 +7,24 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // UI Elements
     const recommendedSchemes = document.getElementById("recommendedSchemes");
+    const appliedSchemes = document.getElementById("appliedSchemes");
+    const schemeToggle = document.getElementById("schemeToggle");
+    const toggleText = document.getElementById("toggleText");
 
     let userData = {};
+
+    // Toggle between Recommended & Applied Schemes
+    schemeToggle.addEventListener("change", function () {
+        if (schemeToggle.checked) {
+            recommendedSchemes.classList.add("hidden");
+            appliedSchemes.classList.remove("hidden");
+            toggleText.textContent = "Applied Schemes";
+        } else {
+            recommendedSchemes.classList.remove("hidden");
+            appliedSchemes.classList.add("hidden");
+            toggleText.textContent = "Recommended Schemes";
+        }
+    });
 
     // Fetch user data from Firestore using Document ID stored in localStorage
     async function getUserData() {
@@ -117,12 +133,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     function renderSchemes(schemes) {
         recommendedSchemes.innerHTML = schemes.length
             ? schemes.map(scheme => `
-                <div class="scheme-card" data-category="${scheme.category || 'unknown'}">
-                    <h3>${scheme.scheme}</h3>
-                    <p>📝 Description: ${scheme.description || "N/A"}</p>
-                    <p>🏩 Issued by: ${scheme.issuer || "N/A"}</p>
-                    <p>✅ Match Percentage: <strong>${scheme.matchPercentage}%</strong></p>
-                    <a href="${scheme.link}" target="_blank"><button>Apply Now</button></a>
+                <div class="scheme-card">
+                    <div class="scheme-header">
+                        <h3>${scheme.scheme}</h3>
+                        <span class="match-percentage">${scheme.matchPercentage}% Match</span>
+                    </div>
+                    <p class="scheme-description">${scheme.description || "No description available."}</p>
+                    <p class="scheme-issuer"><strong>🏛 Issuer:</strong> ${scheme.issuer || "N/A"}</p>
+                    <div class="scheme-footer">
+                        <a href="${scheme.link}" target="_blank">
+                            <button class="apply-btn">Apply Now</button>
+                        </a>
+                    </div>
                 </div>
             `).join('')
             : `<p class="no-match">⚠️ No matching schemes found.</p>`;
