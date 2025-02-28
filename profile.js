@@ -139,7 +139,10 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("❌ Error uploading image:", error);
         }
     });
-
+    document.getElementById("back-btn").addEventListener("click", function () {
+        window.location.href = "homepage.html"; // Change "index.html" to your homepage URL if different
+    });
+    
     saveBtn.addEventListener("click", async function() {
         const userDocId = localStorage.getItem("userDocId");
         if (!userDocId) {
@@ -157,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         });
+
 
         if (Object.keys(userData).length === 0) {
             alert("⚠️ No new data to save!");

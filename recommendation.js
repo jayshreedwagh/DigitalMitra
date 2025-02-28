@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         <h3>${scheme.scheme}</h3>
                         <span class="match-percentage">${scheme.matchPercentage}% Match</span>
                     </div>
-                    <p class="scheme-description">${scheme.description || "No description available."}</p>
+                    <p class="scheme-description">${scheme.Description || "No description available."}</p>
                     
                     <div class="scheme-footer">
                         <a href="${scheme.link}" target="_blank">
